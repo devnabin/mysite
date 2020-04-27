@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/style/styles.css">
+  <link rel="stylesheet" href="/style/login.css">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  {{>nav}}
+
+  <div class="login">
+    <span class="material-icons biglogo">
+      supervised_user_circle
+    </span>
+    <form action="/getdata" method="POST">
+      <span id="logintext">Login</span><br>
+      <div class="usernamediv">
+        <span class="material-icons">
+          account_circle
+        </span>
+        <input type="text" name="user" placeholder="Username">
+      </div>
+
+      <br>
+      <br>
+
+      <span id="logintext">Password</span><br>
+
+      <div class="passworddiv">
+        <span class="material-icons">
+          vpn_key
+        </span>
+        <input type="password" name="pass" id="inputtext" placeholder="Password">
+      </div>
+
+      <button id="loginbutton" type="submit">Login<span class="material-icons">keyboard_arrow_right
+        </span></button>
+    </form>
+    <p>
+      {{!-- Please fill the formm --}}
+    </p>
+    <br>
+    <br>
+    <hr>
+    <div id="newacc">
+      <span class="or">Or </span> <br>
+      <span class="b"> <a href="/register.css">Create Account<span class="material-icons">keyboard_arrow_right
+          </span></a></span>
+
+    </div>
+  </div>
+</body>
+<script src="/js/app.js"></script>
+
+</html>
