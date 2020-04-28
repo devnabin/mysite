@@ -2,7 +2,6 @@ const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
 const chalk = require('chalk');
-console.log(chalk.blue('Hello world!'));
 
 
 //To get data from from
@@ -19,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const viewsPath = path.join(__dirname , '../templates/views')
 const staticPath = path.join(__dirname, "../public");
 const partialsPath = path.join(__dirname , '../templates/Partials')
-console.log(staticPath)
+
 
 //To locate partials files
 hbs.registerPartials(partialsPath)
@@ -53,9 +52,6 @@ app.get('/register', (req,res)=>{
 
 //conformregistration page 
 app.post('/register', ({body},res)=>{
-    console.log(body.username)
-    console.log(body.password)
-    console.log(body.email)
     if(!body.username){
      return   res.send('somthing error') 
     } else if(!body.password){
