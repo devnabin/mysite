@@ -2,33 +2,10 @@ const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
 const chalk = require('chalk');
- 
 console.log(chalk.blue('Hello world!'));
 const bodyParser = require('body-parser');
 
-//mangodb
-const { MongoClient , } = require('mongodb')
-const connectionUrl = "mongodb://127.0.0.1:27017";
-const database = 'mysite'
-MongoClient.connect(connectionUrl ,{useNewUrlParser: true , useUnifiedTopology:true} , (error , client)=>{
-    if(error) return console.log('error , ' , error)
 
-    const db = client.db(database);
-
-    db.collection('userinfo').insertOne({
-        Name : 'test',
-    },(error, result)=>{
-        if(error) return console.log(error , 'Error ')
-    
-        console.log(chalk.green.inverse('files save successfully'))
-    })
-})
-
-
-
-
-
-//mongodb *
 const app = express()
 const port = process.env.PORT || 3000
 
@@ -54,6 +31,11 @@ app.get('', (req,res)=>{
 })
 app.get('/login', (req,res)=>{
     res.render('login' , {
+         name : 'Nabin'
+    })
+})
+app.get('/register', (req,res)=>{
+    res.render('register', {
          name : 'Nabin'
     })
 })

@@ -2,23 +2,46 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/style/styles.css">
+    <link rel="stylesheet" href="/style/register.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <div class="maindiv">
-   <div class="formdiv">
-       <form action="">
-           <input type="text"> <br>
-           <input type="text"> <br>
-           <input type="text"> <br>
-           <input type="text"> <br>
-           <button type="submit">Register</button>
-       </form>
-   </div>
+    {{>nav}}
+    <div class="register">
 
-   </div>
+ <form action="/">
+ <span class="material-icons icon">
+recent_actors
+</span>
+ {{!-- Username --}}
+ <span class="material-icons">
+account_circle
+</span>
+ <input name="username" type="text" placeholder="Username" class="items"> 
+ {{!-- Password:- --}}
+ <span class="material-icons">
+vpn_key
+</span>
+ <input name="password" type="password" placeholder="Password" class="items"> 
+<span class="material-icons">
+email
+</span>
+ <input name="email" type="email" placeholder="Email" class="items">
+ <button type="submit" class="registerbutton">Register</button>
+
+ </form>
+
+
+
+
+
+    </div>
+    
 </body>
 </html>
