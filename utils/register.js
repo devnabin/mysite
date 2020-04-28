@@ -1,4 +1,4 @@
-const mongodb = require('mongodb')
+/* const mongodb = require('mongodb')
 const MongoClient = mongodb.MongoClient
 const connectionUrl = "mongodb://127.0.0.1:27017";
 const database = 'mysite'
@@ -13,4 +13,4 @@ db.collection('user').insertOne({
 })
 
 })
-}
+} */
