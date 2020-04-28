@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="/style/styles.css">
     <link rel="stylesheet" href="/style/register.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
 
@@ -11,37 +12,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     {{>nav}}
+      <div class="checkinfo">
+              <p></p>
+          </div>
     <div class="register">
-
- <form action="/">
- <span class="material-icons icon">
-recent_actors
-</span>
- {{!-- Username --}}
- <span class="material-icons">
-account_circle
-</span>
- <input name="username" type="text" placeholder="Username" class="items"> 
- {{!-- Password:- --}}
- <span class="material-icons">
-vpn_key
-</span>
- <input name="password" type="password" placeholder="Password" class="items"> 
-<span class="material-icons">
-email
-</span>
- <input name="email" type="email" placeholder="Email" class="items">
- <button type="submit" class="registerbutton">Register</button>
-
- </form>
-
-
-
-
-
+        <form action="/register" method="POST" name="myForm" onsubmit="return validateForm()">
+            <span class="material-icons icon">
+                recent_actors
+            </span>
+            {{!-- Username --}}
+            <span class="material-icons">
+                account_circle
+            </span>
+            <input name="username" required type="text" placeholder="Username" class="items" >
+            {{!-- Password:- --}}
+            <span class="material-icons">
+                vpn_key
+            </span>
+            <input name="password" required type="password" placeholder="Password" class="items">
+            <span class="material-icons">
+                email
+            </span>
+            <input name="email" required  type="email" placeholder="Email" class="items">
+            <button type="submit" class="registerbutton">Register</button>
+        </form>
     </div>
-    
+
 </body>
+<script src="/js/formvalidation.js"></script>
+
 </html>
