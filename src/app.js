@@ -1,7 +1,8 @@
 const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
-
+const getgeo = require("../utils/login");
+const getweather = require("../utils/register");
 
 //To get data 
 // const bodyParser = require('body-parser');
@@ -70,4 +71,11 @@ app.get('/register', (req,res)=>{
 // })
 
 
+app.get("*", (req, res) => {
+    res.render("404", {
+      error: "Page not Found",
+    });
+  });
+
+  
 app.listen(port, () => console.log('app is listing on port  ' + port) )
