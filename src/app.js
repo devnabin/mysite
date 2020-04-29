@@ -1,7 +1,6 @@
-const express = require('express')
-const path = require('path')
-const hbs = require('hbs')
-
+const express = require("express");
+const path = require("path");
+const hbs = require("hbs");
 
 
 //To get data 

@@ -2,9 +2,9 @@
   "name": "mysite",
   "version": "1.0.0",
   "description": "A first big project in web",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",
