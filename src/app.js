@@ -5,14 +5,14 @@ const hbs = require('hbs')
 
 
 //To get data 
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 
 
 const app = express()
 const port = process.env.PORT || 3000
 
 //to get data from form this is necessary
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 //path
 const viewsPath = path.join(__dirname , '../templates/views')
@@ -50,25 +50,25 @@ app.get('/register', (req,res)=>{
 })
 
 
-//conformregistration page 
-app.post('/register', ({body},res)=>{
-    if(!body.username){
-     return   res.send('somthing error') 
-    } else if(!body.password){
-        return   res.send('somthing error') 
-    }else if(!body.email){
-        return   res.send('somthing error') 
-    }
+// //conformregistration page 
+// app.post('/register', ({body},res)=>{
+//     if(!body.username){
+//      return   res.send('somthing error') 
+//     } else if(!body.password){
+//         return   res.send('somthing error') 
+//     }else if(!body.email){
+//         return   res.send('somthing error') 
+//     }
          
     
-    res.send('Good')          
+//     res.send('Good')          
     
-    // res.render('conformregistration')
-})
+//     // res.render('conformregistration')
+// })
 
 
-app.post('/login', (req,res)=>{
-})
+// app.post('/login', (req,res)=>{
+// })
 
 
 app.listen(port, () => console.log('app is listing on port  ' + port) )
