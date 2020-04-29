@@ -2,7 +2,7 @@
   "name": "mysite",
   "version": "1.0.0",
   "description": "A first big project in web",
-  "main": "src/app.js",
+  "main": "index.js",
   "scripts": {
     "start": "node src/app.js"
   },
