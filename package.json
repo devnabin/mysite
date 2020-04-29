@@ -1,13 +1,22 @@
 {
   "name": "mysite",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "A first big project in web",
+  "main": "index.js",
   "scripts": {
     "start": "node src/app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nabiin/mysite.git"
+  },
+  "keywords": [],
   "author": "Nabin Bhandari",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nabiin/mysite/issues"
+  },
+  "homepage": "https://github.com/Nabiin/mysite#readme",
   "dependencies": {
     "express": "^4.17.1",
     "hbs": "^4.1.1"
