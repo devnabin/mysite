@@ -4,7 +4,7 @@ const hbs = require('hbs')
 
 
 
-//To get data from from
+//To get data 
 const bodyParser = require('body-parser');
 
 
@@ -68,10 +68,6 @@ app.post('/register', ({body},res)=>{
 
 
 app.post('/login', (req,res)=>{
-console.log(req.body.pass);
-console.log(req.body.user);
-
-res.send('hello')
 })
 
 
