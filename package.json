@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/app.js"
   },
-  "author": "",
+  "author": "Nabin Bhandari",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
