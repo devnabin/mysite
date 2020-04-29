@@ -4,6 +4,7 @@ const hbs = require("hbs");
 const getgeo = require("../utils/login");
 const getweather = require("../utils/register");
 
+console.log('1')
 //To get data 
 // const bodyParser = require('body-parser');
 
@@ -34,6 +35,7 @@ app.set('view engine', 'hbs');
 app.set('views'  ,viewsPath)
 
 
+console.log('2')
 //home page
 app.get('', (req,res)=>{
     res.render('index')
@@ -50,7 +52,7 @@ app.get('/register', (req,res)=>{
 })
 
 
-// //conformregistration page 
+//conformregistration page 
 // app.post('/register', ({body},res)=>{
 //     if(!body.username){
 //      return   res.send('somthing error') 
@@ -77,5 +79,5 @@ app.get("*", (req, res) => {
     });
   });
 
-  
+
 app.listen(port, () => console.log('app is listing on port  ' + port) )
