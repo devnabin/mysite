@@ -24,7 +24,7 @@ function validateForm() {
     return false;
   }
 
-
+  sessionStorage.setItem('username' , username)
 }
 
 function displayerror(args) {

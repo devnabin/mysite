@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="/style/styles.css">
+  <link rel="stylesheet" href="/style/confirm.css">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  {{>nav}}
+      <div id="error">
+              <p></p>
+          </div>
+  <div>
+    <p id="username"></p>
+    <p id="checkval">{{check}}</p>
+    <input type="text" id="typedtext"><br>
+    <button onclick="check()"> validate </button>
+
+  </div>
+</body>
+<script src="/js/localstorage.js"></script>
+
+</html>
