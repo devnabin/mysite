@@ -1,81 +1,48 @@
-const express = require("express");
-const path = require("path");
-const hbs = require("hbs");
-var randomstring = require("randomstring");
+const express = require('express')
+const path = require('path')
+const hbs = require('hbs')
 
-/* const register = require("../utils/register");
-const login = require("../utils/login");
- */
+const app = express()
 
-//To get data
-const bodyParser = require("body-parser");
+//Getting data in json
+app.use(express.json());
 
-const app = express();
-const port = process.env.PORT || 3000;
 
-//to get data from form this is necessary
-app.use(bodyParser.urlencoded({ extended: true }));
+//Routs
+const userlogs = require('./user/logs')
 
-//path
-const viewsPath = path.join(__dirname, "../templates/views");
-const staticPath = path.join(__dirname, "../public");
-const partialsPath = path.join(__dirname, "../templates/Partials");
+app.use(userlogs)
 
-//To locate partials files
-hbs.registerPartials(partialsPath);
 
-//To tell public path for static files
-app.use(express.static(staticPath));
+//Paths
+const viewsPath = path.join(__dirname , '../templates/views');
+const partialsPath = path.join(__dirname , '../templates/partials');
+const staticPath = path.join(__dirname , '../public');
 
-//set express to use handles bar
-app.set("view engine", "hbs");
 
-//to set the location of views path or hbs path or handlesbar path
+
+//handles bar set up
+app.set('view engine', 'hbs');
 app.set("views", viewsPath);
 
-//home page
-app.get("", (req, res) => {
-  res.render("index");
-});
 
-//login page
-app.get("/login", (req, res) => {
-  res.render("login");
-});
+//Use static path
+app.use(express.static(staticPath))
 
-//login response
-app.post("/login", ({body}, res) => {
+//static path setup
+hbs.registerPartials(partialsPath)
 
-login(body.username , body.password , (respo)=>{
- res.send(respo)
+
+//Home page
+app.get('/', (req,res)=>{
+  res.render('index');
 })
-});
-
-//Registration page
-app.get("/register", (req, res) => {
-  res.render("register");
-});
-
-//conformregistration page
-app.post("/register", ({ body }, res) => {
-  if (!body.username || !body.password || !body.email)
-    return res.send("somthing error");
-  if (register(body.username, body.password, body.email))
-    res.render("conformregistration" , {
-      check : randomstring.generate(7),
-    });
-});
 
 
 
 
 
 
-//
-app.get("*", (req, res) => {
-  res.render("404", {
-    error: "Page not Found",
-  });
-});
 
-app.listen(port, () => console.log("app is listing on port  " + port));
+
+app.listen(3000, ()=> console.log('App is listern on port 3000'));

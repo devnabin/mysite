@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Noto Sans TC", sans-serif;
+}
+body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/* navigation */
+.navmaindiv {
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 1px 1px 5px black;
+}
+
+/* logo */
+.navmaindiv .logo img {
+  height: 50px;
+  margin-left: 10px;
+}
+
+/* pages or a tags in navigation */
+nav a {
+  color: black;
+  margin-left: 25px;
+  font-size: large;
+  text-decoration: none;
+}
+
+nav a:hover{
+  border-bottom: 1px solid black;
+  }
+
+nav {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.search{
+    height: 40px;
+    margin-top: 10px;
+    display: flex;
+    border-bottom: 1px solid black; 
+}
+
+ input{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    text-align: center;
+}
+
+.search input::placeholder{
+    color: rgb(103, 101, 105);
+    font-size: 15px;
+    text-align: center;
+}
+
+ button{
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+.search button:hover{
+color: orangered;
+}

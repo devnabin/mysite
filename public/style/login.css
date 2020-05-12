@@ -1,138 +1,70 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap');
-*{
-padding: 0 ;
-margin: 0;
-color: white;
-font-family: 'Noto Sans TC', sans-serif;
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
 
-}
-.login .biglogo{
-    font-size: 120px;
-    position: absolute;
-    top :110px;
-    left:710px;
-    z-index: 1;
+.userlog {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
 }
 
-.login{
-    padding-top: 30px;
-    /* padding-left: 30px; */
-    /* padding-right: 30px; */
-
-    height: 500px;
-    width: 400px;
-    margin-top: 80px;
-    margin-left: 580px;
-    background-color: transparent;
-    border: 1px solid white;
-
-    border-radius: 20px;
-
-    /* border-radius: 20px; */
-    /* text-align: center; */
-    /* position: absolute; */
-  
+form {
+  margin: 50px;
+  width: 300px;
+  padding: 30px;
+  text-align: center;
+  border: 3px dashed gray;
+  border-radius: 15px;
+  box-shadow: 1px 1px 7px black, 0px 0px 7px white;
 }
 
-
-#logintext{
-    margin-left: 30px;
-    font-size: 20px;
-    /* letter-spacing: 1px; */
-    color: white;
+form:hover{
+    border-color: black;
+  box-shadow: 1px 1px 7px black, 1px 1px 7px green;
 
 }
-form{
-    /* background-color: aqua; */
-    margin-top: 70px;
+form input {
+  border-bottom: 1px solid black;
 }
-.usernamediv , .passworddiv{
-    /* background-color: black; */
-    text-align: center;
-    width: 380px;
-    border-bottom: 1px solid white;
-    margin-left: 10px;
-
-
-}
-input{
-    /* padding-left: 3px; */
-    height: 40px;
-    width: 350px;
-    background-color: transparent;
-    outline: none;
-   color: white;
-   border: none;
-   font-size: 15px;
-   /* position: absolute; */
-   
-}
-#inputtext{
-   font-size: 10px;
-
-}
-input::placeholder{
-    color: rgb(245, 196, 107);
-    font-size: 12px;
-}
-.material-icons , input{
-/* margin-left: 10px; */
+form input:focus{
+  border-color: green;
 }
 
+form button {
+    margin-left: 110px;
+    border: 1px solid;
+  box-shadow: 1px 1px 4px black;
+  border-radius: 7px;
 
-#loginbutton{
-    margin-top: 50px;
-    margin-left: 150px;
-    background-color: transparent;
-    font-size: 20px;
-    padding: 10px;
-
-    display: flex;
-    align-items: center;
-    outline: none;
-    border: none;
-    border-bottom: 1px solid white;
-    border-top: 1px solid white;
-    border-radius: 20px;
-
+  padding: 4px;
+  display: flex;
 }
-#loginbutton:hover{
-    /* border: 1px solid white; */
-    color: rgb(20, 255, 11);
+
+form button:hover {
+    border-color: none;
+    box-shadow: 1px 1px 8px green;
+  /* border : 1px solid green; */
 
 }
 
-
- #loginbutton .material-icons{
-   font-size: 30px;
+.icon{
+    border-bottom: 1px solid black;
+    position: relative;
+    top: 4px;    
+    left: 4px;
+}
+.icons{
+    position: relative;
+    top: 6px;    
+}
+form a{
+    text-decoration: none;
+    color: black;
+}
+form a:hover{
+    text-decoration: underline;
 }
 
-
-
- #newacc{
-     text-align: center; 
-} 
-
-#newacc .or {
-    background-color:#9543E3;
-    font-size: 15px;
-    position: absolute;
-    top:615px;
-    left:770px;
-}
-
-
-#newacc .b a {
-    /* background-color: white; */
-    margin-top: 30px;
-/* display: flex; */
-text-decoration: none;
-justify-content: center;
-font-size: 15px;
-
-}  
-
-#newacc .b a:hover{
-    border-bottom: 1px solid white;
-
+.warning{
+height: 10px;
 }
