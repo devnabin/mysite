@@ -2,12 +2,10 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="/style/styles.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/login.css">
     <link rel="stylesheet" href="/style/register.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -15,33 +13,34 @@
 
 <body>
     {{>nav}}
-      <div class="checkinfo">
-              <p></p>
-          </div>
-    <div class="register">
-        <form action="/register" method="POST" name="myForm" onsubmit="return validateForm()">
-            <span class="material-icons icon">
-                recent_actors
-            </span>
-            {{!-- Username --}}
-            <span class="material-icons">
+    <div class="userlog">
+      <div class="warning">
+          <p></p>
+      </div>
+        <form action="register" method="POST" name="myForm" onsubmit="return validateForm()">
+            Username :- <br>
+            <span class="material-icons userlogo">
                 account_circle
             </span>
-            <input name="username" required type="text" placeholder="Username" class="items" >
-            {{!-- Password:- --}}
-            <span class="material-icons">
+            <input name="username" required type="text" placeholder="Ram Hari Kiju" class="items" id="username">
+            <br><br><br>
+            Password :- <br>
+            <span class="material-icons passlogo">
                 vpn_key
             </span>
-            <input name="password" required type="password" placeholder="Password" class="items">
+            <input name="password" required type="password" placeholder="demo$pass!" class="items" id="password">
+            <br><br><br>
+            Email :- <br>
             <span class="material-icons">
                 email
             </span>
-            <input name="email" required  type="email" placeholder="Email" class="items">
-            <button type="submit" class="registerbutton">Register</button>
+            <input name="email" required type="email" placeholder="demo@email.com" class="items">
+            <br><br><br>
+            <button id="registerbutton">Register</button>
         </form>
     </div>
-
+    {{>footer}}
 </body>
-<script src="/js/formvalidation.js"></script>
+<script src="/js/registerformvalidation.js"></script>
 
 </html>

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="/style/styles.css">
+  <link rel="stylesheet" href="/style/style.css">
   <link rel="stylesheet" href="/style/login.css">
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -14,47 +14,36 @@
 <body>
   {{>nav}}
 
-  <div class="login">
-    <span class="material-icons biglogo">
-      supervised_user_circle
-    </span>
-    <form action="/login" method="POST">
-      <span id="logintext">Login</span><br>
-      <div class="usernamediv">
-        <span class="material-icons">
-          account_circle
-        </span>
-        <input type="text" name="username" placeholder="Username">
+  <div class="userlog">
+      <div class="warning">
+<p></p>
       </div>
-
-      <br>
-      <br>
-
-      <span id="logintext">Password</span><br>
-
-      <div class="passworddiv">
-        <span class="material-icons">
+    <div class="form">
+      <form action="">
+        Email:-<br>
+        <span class="material-icons icon">
+          person_outline
+        </span>
+        <input type="email" required placeholder="demo@email.com"> <br><br><br>
+        Password :-<br>
+        <span class="material-icons icon">
           vpn_key
         </span>
-        <input type="password" name="password" id="inputtext" placeholder="Password">
-      </div>
-
-      <button id="loginbutton" type="submit">Login<span class="material-icons">keyboard_arrow_right
-        </span></button>
-    </form>
-    <p>
-      {{!-- Please fill the formm --}}
-    </p>
-    <br>
-    <br>
-
-    <div id="newacc">
-      <span class="or">Or </span> <br>
-      <span class="b"> <a href="/register">Create Account</a></span>
-
+        <input type="password" required placeholder="demo$pass!"> <br><br> <br>
+        <button type="submit">Login<span class="material-icons">
+            navigate_next
+          </span>
+        </button>
+        <br>
+        <div>or</div>
+        <a href="register"> <span class="material-icons icons">
+            assignment_ind
+          </span>Create Account</a>
+      </form>
     </div>
-  </div>
-</body>ss
+    </div>
+    {{>footer}}
+</body>
 <script src="/js/app.js"></script>
 
 </html>
