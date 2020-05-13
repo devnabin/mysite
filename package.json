@@ -22,7 +22,9 @@
     "express": "^4.17.1",
     "hbs": "^4.1.1",
     "mongodb": "^3.5.7",
-    "randomstring": "^1.1.5"
+    "mongoose": "^5.9.13",
+    "randomstring": "^1.1.5",
+    "validator": "^13.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"

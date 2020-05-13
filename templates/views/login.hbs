@@ -19,18 +19,18 @@
 <p></p>
       </div>
     <div class="form">
-      <form action="">
+      <form action="/login" method="POST">
         Email:-<br>
         <span class="material-icons icon">
           person_outline
         </span>
-        <input type="email" required placeholder="demo@email.com"> <br><br><br>
+        <input type="email" required placeholder="demo@email.com" id="email"> <br><br><br>
         Password :-<br>
         <span class="material-icons icon">
           vpn_key
         </span>
-        <input type="password" required placeholder="demo$pass!"> <br><br> <br>
-        <button type="submit">Login<span class="material-icons">
+        <input type="password" required placeholder="demo$pass!" id="password"> <br><br> <br>
+        <button>Login<span class="material-icons">
             navigate_next
           </span>
         </button>
@@ -44,6 +44,7 @@
     </div>
     {{>footer}}
 </body>
-<script src="/js/app.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/login.js"></script>
 
 </html>

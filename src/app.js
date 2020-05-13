@@ -1,11 +1,14 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
+require('../src/database/mongo/mongodb')
 
 const app = express()
 
-//Getting data in json
-app.use(express.json());
+//Get the value 
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 
 //Routs

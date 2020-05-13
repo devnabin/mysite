@@ -4,7 +4,6 @@
 <head>
     <link rel="stylesheet" href="/style/style.css">
     <link rel="stylesheet" href="/style/login.css">
-    <link rel="stylesheet" href="/style/register.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,15 +13,15 @@
 <body>
     {{>nav}}
     <div class="userlog">
-      <div class="warning">
-          <p></p>
-      </div>
-        <form action="register" method="POST" name="myForm" onsubmit="return validateForm()">
+        <div class="warning">
+            <p></p>
+        </div>
+        <form method="POST" action="/register" onsubmit="return validateForm()">
             Username :- <br>
             <span class="material-icons userlogo">
                 account_circle
             </span>
-            <input name="username" required type="text" placeholder="Ram Hari Kiju" class="items" id="username">
+            <input name="name" required type="text" placeholder="Ram Hari Kiju" class="items" id="username">
             <br><br><br>
             Password :- <br>
             <span class="material-icons passlogo">
@@ -31,16 +30,18 @@
             <input name="password" required type="password" placeholder="demo$pass!" class="items" id="password">
             <br><br><br>
             Email :- <br>
-            <span class="material-icons">
+            <span class="material-icons emaillogo">
                 email
             </span>
-            <input name="email" required type="email" placeholder="demo@email.com" class="items">
+            <input name="email" required type="email" placeholder="demo@email.com" class="items" id="email">
             <br><br><br>
-            <button id="registerbutton">Register</button>
+            <button type="submit">Register</button>
         </form>
     </div>
     {{>footer}}
 </body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/js/registerformvalidation.js"></script>
+
 
 </html>
