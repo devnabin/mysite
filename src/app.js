@@ -1,6 +1,11 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
+//cookieParser
+var cookieParser = require('cookie-parser')
+
+
+
 require('../src/database/mongo/mongodb')
 
 const app = express()
@@ -9,6 +14,7 @@ const app = express()
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(cookieParser())   //cookieParser
 
 
 //Routs
@@ -49,3 +55,25 @@ app.get('/', (req,res)=>{
 
 
 app.listen(3000, ()=> console.log('App is listern on port 3000'));
+
+
+
+/* const user ={
+  pass :[
+
+  ]
+}
+
+const jwt = require('jsonwebtoken')
+
+
+function fun(){
+
+  const token = jwt.sign({ _id: '123' }, 'nabin')
+  user.pass.concat= {token}
+  const verify = jwt.verify(token , 'nabin' )
+  // console.log(verify)
+  console.log(user)
+}
+
+fun() */
