@@ -4,7 +4,6 @@ const User = require("../database/model/Usermodel");
 
 //Login Page
 router.get("/login", (req, res) => {
-  console.log(req.cookies.jwttoken)
   res.render("login");
 });
 
@@ -18,7 +17,7 @@ router.post("/login", async (req, res) => {
       res.status(400).send("Incorrect password");
     } else {
       const token = await user.jwtoken();
-        res.cookie("jwttoken", token, {expire: 360000 + Date.now() ,httpOnly: true ,secure : true });
+        res.cookie("jwttoken", token, {Expires: 360000 + Date.now() ,httpOnly: true ,secure : true });
       //var cookie = req.cookies.cookieName;
       // console.log('cookie exists', cookie); //to view the cookiews
       res.status(200).send({ user, token });

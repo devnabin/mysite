@@ -2,7 +2,7 @@ const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
 //cookieParser
-var cookieParser = require('cookie-parser')
+// var cookieParser = require('cookie-parser')
 
 
 
@@ -14,7 +14,7 @@ const app = express()
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(cookieParser())   //cookieParser
+// app.use(cookieParser())   //cookieParser
 
 
 //Routs
