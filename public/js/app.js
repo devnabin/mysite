@@ -1,16 +1,13 @@
+ var x = document.cookie;
+if(x.includes('token')){
+  console.log('user is active')
 
-/* const submit = document.getElementById('registerbutton')
-submit.addEventListener('click' , ()=>{
-    axios.post('/register', {
-        fname: 'Fred',
-        lastName: 'Flintstone'
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-}) */
+  document.querySelector('.loginButton').href="/me"; 
+  document.querySelector('.loginButtonImg').href="/me"; 
 
+  document.getElementById('logText').textContent="Nabin Bhandari";  
+  // document.querySelector('.loginButton').src="//media/img/mypic.jpg"; 
 
+  
+ 
+}

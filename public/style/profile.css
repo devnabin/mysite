@@ -1,0 +1,195 @@
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
+
+.navmaindiv {
+  display: none;
+}
+.footer {
+  display: none;
+}
+
+* {
+  /* background-color: rgb(202, 202, 202); */
+  background-color: rgb(240, 238, 238);
+}
+.maindiv {
+  /* margin: 100px; */
+  margin: 35px;
+  min-height: 88vh;
+  display: flex;
+  /* background-color: aqua; */
+}
+
+/* main-child-1 */
+.main-child-1 {
+  padding: 5px;
+  /* background-color: rgb(125, 106, 143); */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.main-child-1 .material-icons {
+  /* background-color: rebeccapurple; */
+  font-size: 40px;
+}
+
+/* sub 2 */
+.main-child-2 {
+  /* align-self: center; */
+  display: flex;
+  /* background-color: pink; */
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
+  /* align-content: center; */
+  /* text-align: center; */
+  /* justify-self: flex-end; */
+  justify-content: center;
+}
+
+.sub2-child1 {
+  /* background-color: rebeccapurple; */
+  display: flex;
+}
+
+.sub2-child2 {
+  margin-top: 10px;
+  font-size: 14px;
+  width: 500px;
+}
+
+.maininfo {
+  align-self: center;
+  margin-left: 10px;
+  line-height: 1.5;
+}
+.maininfo p {
+  line-height: 0.8;
+}
+img {
+  height: 200px;
+  width: 200px;
+  /* border: 1px solid rgb(143, 141, 141); */
+  border-radius: 50%;
+}
+
+.hello {
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+  color: rgb(87, 87, 87);
+  font-size: 40px;
+}
+.name {
+  letter-spacing: 1px;
+  font-family: "Open Sans", sans-serif;
+
+  font-size: 30px;
+}
+.email {
+  color: rgb(87, 87, 87);
+  font-family: "Open Sans", sans-serif;
+
+  font-size: 15px;
+}
+
+/* button  */
+
+.but {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  /* color: blue; */
+}
+
+.but .material-icons {
+  /* color: blueviolet; */
+  font-size: 30px;
+}
+
+/* .main-child-3 */
+.main-child-3 {
+  /* background-color: blue; */
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* align-content: center; */
+  /* text-align: center; */
+  /* justify-self: center; */
+  /* justify-content: space-evenly; */
+}
+
+.main-child-3 button {
+  margin-top: 80px;
+}
+
+.but {
+  padding: 5px;
+  /* border-radius: 10px; */
+  box-shadow: 1px 1px 3px black, -1px -1px 3px white;
+}
+.but:hover {
+  box-shadow: 3px 3px 3px black, -3px -3px 3px white;
+}
+
+.but:hover .update {
+  color: green;
+}
+.but:hover .delete {
+  color: red;
+}
+.but:hover .logout {
+  color: white;
+}
+.but:hover .goback {
+  color: rgb(248, 134, 3);
+}
+.but:hover .menu {
+  color: rgb(146, 81, 250);
+}
+
+/* /test */
+/* =================================== */
+.test {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.521);
+  position: absolute;
+  /* z-index: -1; */
+}
+
+.testing {
+  align-self: center;
+  width: 600px;
+  height: 300px;
+  position: relative;
+  background-color: rgb(240, 238, 238);
+  box-shadow: 3px 3px 3px black, -9px -9px 3px white;
+
+}
+
+.warnmsg{
+    text-align: center;
+  color: red;
+  font-weight: bold;
+}
+
+
+
+/* Warning message  */
+.notify{
+  text-align: center;
+  font-size: 30px;
+  margin-top: 70px;
+  /* background-color: blue; */
+}
+
+/* .logout */
+.logoutdiv{
+  display: flex;
+  /* background-color: rgb(255, 0, 128); */
+  justify-content: space-evenly;
+  margin-top: 10px;
+}

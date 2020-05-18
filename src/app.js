@@ -2,7 +2,7 @@ const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
 //cookieParser
-// var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser')
 
 
 
@@ -14,13 +14,16 @@ const app = express()
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-// app.use(cookieParser())   //cookieParser
+app.use(cookieParser())   //cookieParser
 
 
 //Routs
-const userlogs = require('./user/logs')
+const userlogs = require('./user/userroute') //user
+const profile = require('./user/profileroute') //Profile
+
 
 app.use(userlogs)
+app.use(profile)
 
 
 //Paths
@@ -42,13 +45,19 @@ app.use(express.static(staticPath))
 hbs.registerPartials(partialsPath)
 
 
+//middleware for site down
+/* app.use((req, res, next)=>{
+      res.send('Site will unabmle to get request')
+})  */
+
+
+
 //Home page
 app.get('/', (req,res)=>{
-  res.render('index');
+  res.render('index' ,{
+    alink : "Login 😁",
+  });
 })
-
-
-
 
 
 
@@ -58,22 +67,8 @@ app.listen(3000, ()=> console.log('App is listern on port 3000'));
 
 
 
-/* const user ={
-  pass :[
 
-  ]
-}
-
-const jwt = require('jsonwebtoken')
-
-
-function fun(){
-
-  const token = jwt.sign({ _id: '123' }, 'nabin')
-  user.pass.concat= {token}
-  const verify = jwt.verify(token , 'nabin' )
-  // console.log(verify)
-  console.log(user)
-}
-
-fun() */
+/* 
+cookies
+var cookie = req.cookies.token;
+console.log('register  ' ,req.cookies  , cookie) */

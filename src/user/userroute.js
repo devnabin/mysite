@@ -1,10 +1,15 @@
 const express = require("express");
 const router = new express.Router();
 const User = require("../database/model/Usermodel");
+const auth = require('../auth/auth')
 
 //Login Page
 router.get("/login", (req, res) => {
-  res.render("login");
+  if(req.cookies.token){
+    res.send('Please Log out First')
+  } else{
+    res.render("login");
+  }  
 });
 
 //Login post
@@ -17,9 +22,6 @@ router.post("/login", async (req, res) => {
       res.status(400).send("Incorrect password");
     } else {
       const token = await user.jwtoken();
-        res.cookie("jwttoken", token, {Expires: 360000 + Date.now() ,httpOnly: true ,secure : true });
-      //var cookie = req.cookies.cookieName;
-      // console.log('cookie exists', cookie); //to view the cookiews
       res.status(200).send({ user, token });
     }
   } catch (error) {
@@ -30,11 +32,18 @@ router.post("/login", async (req, res) => {
 });
 
 //register Page
-router.get("/register", (req, res) => {
+router.get("/register",auth , (req, res) => {
+
+if(!req.reject) {
+  res.send('Please Log out First')
+}else{
   res.render("register");
+}
+
 });
 
 router.post("/register", async (req, res) => {
+  if(req.cookies.token) return res.send('Please logout First')
   try {
     console.log("asdf");
     const user = await User(req.body);
@@ -44,5 +53,16 @@ router.post("/register", async (req, res) => {
     res.status(400).send(error);
   }
 });
+
+
+
+
+
+router.get('/test', async (req,res)=>{
+  res.render('test')
+
+})
+
+
 
 module.exports = router;

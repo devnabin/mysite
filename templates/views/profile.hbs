@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/profile.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {{>nav}}
+
+    {{!-- testin of absolute --}}
+    {{!-- ===================================================> --}}
+    
+    
+    <div class="test" id="popup">
+          
+        <div  class="testing" id="main-popup">
+            {{!-- <p id="notifi" class="warnmsg"> </p> --}}
+            <p class="notify"> Are you Sure Want to logout ?</p>
+            <div class="logoutdiv">
+            <button class="but" id="logout">
+                <span class="material-icons logout">
+                    power_settings_new
+                </span>
+                Logout For This Device
+            </button><button class="but" id="logout">
+                <span class="material-icons logout">
+                    power_settings_new
+                </span>
+                Logout From All Device
+            </button>
+                          
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="" id="">
+
+        <div  class="" id="">
+            <p id="" class="">  </p>
+        </div>
+
+    </div>
+
+
+   <div class="handon">
+
+   </div>
+
+
+    {{!-- ===================================================> --}}
+    {{!-- testin of absolute --}}
+
+    <div class="maindiv">
+        <div class="main-child-1 main-child">
+            <button class="but" id="return">
+                <span class="material-icons goback">
+                    reply
+                </span>
+                Go Back
+            </button>
+            <button class="but" id="menu">
+                <span class="material-icons menu">
+                    widgets
+                </span>
+                Menu
+            </button>
+
+        </div>
+        <div class="main-child-2 main-child">
+
+            <div class="sub2-child1">
+                <img src="/media/img/mypic.jpg" alt=""> <br>
+                <div class="maininfo">
+
+                    {{!-- <span class="hello">Hello</span> <br> --}}
+                    <p>
+                        <span class="name">{{name}}</span><br>
+                        <span class="email">{{email}}</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="sub2-child2">
+             <p>
+                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, quos libero, quis soluta facilis officiis accusantium in repellat sapiente modi perferendis maxime reiciendis autem optio ab nemo itaque veritatis provident!
+             </p>
+            </div>
+
+
+
+        </div>
+        <div class="main-child-3 main-child">
+            <button class="but" id="logout">
+                <span class="material-icons logout">
+                    power_settings_new
+                </span>
+                Logout
+            </button> <br>
+            <button class="but" id="update">
+                <span class="material-icons update">
+                    input
+                </span>
+                Update
+            </button> <br>
+            <button class="but" id="deleteAccount">
+                <span class="material-icons delete">
+                    delete
+                </span>
+                Delete Account
+            </button>
+        </div>
+    </div>
+    {{>footer}}
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/profile.js"></script>
+
+
+</html>
