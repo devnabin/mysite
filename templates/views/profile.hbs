@@ -13,50 +13,6 @@
 <body>
     {{>nav}}
 
-    {{!-- testin of absolute --}}
-    {{!-- ===================================================> --}}
-    
-    
-    <div class="test" id="popup">
-          
-        <div  class="testing" id="main-popup">
-            {{!-- <p id="notifi" class="warnmsg"> </p> --}}
-            <p class="notify"> Are you Sure Want to logout ?</p>
-            <div class="logoutdiv">
-            <button class="but" id="logout">
-                <span class="material-icons logout">
-                    power_settings_new
-                </span>
-                Logout For This Device
-            </button><button class="but" id="logout">
-                <span class="material-icons logout">
-                    power_settings_new
-                </span>
-                Logout From All Device
-            </button>
-                          
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="" id="">
-
-        <div  class="" id="">
-            <p id="" class="">  </p>
-        </div>
-
-    </div>
-
-
-   <div class="handon">
-
-   </div>
-
-
-    {{!-- ===================================================> --}}
-    {{!-- testin of absolute --}}
 
     <div class="maindiv">
         <div class="main-child-1 main-child">
@@ -89,9 +45,11 @@
             </div>
 
             <div class="sub2-child2">
-             <p>
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, quos libero, quis soluta facilis officiis accusantium in repellat sapiente modi perferendis maxime reiciendis autem optio ab nemo itaque veritatis provident!
-             </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, quos libero, quis soluta facilis
+                    officiis accusantium in repellat sapiente modi perferendis maxime reiciendis autem optio ab nemo
+                    itaque veritatis provident!
+                </p>
             </div>
 
 
@@ -119,6 +77,37 @@
         </div>
     </div>
     {{>footer}}
+
+    {{!-- -------------------------------- update ------------------------------------------------- --}}
+
+    <div class="updatediv">
+        <p> Edit your information </p>
+        <div class="verticalline"></div>
+        <div class="horizantalline"></div>
+
+        <div class="bio-update-div">
+               <form action="">
+                <span class="topic">Update User Info</span> 
+               <div class="form">
+                <input type="text" name="" id="" placeholder="User Name"> <br>
+                Update your bio :-
+                <textarea name="" id="" cols="" rows=""></textarea> <br>
+                </div>
+            </form>
+        </div>
+        <div class="forget-password-div">
+            <form action="">
+                <div class="form">
+                <span class="topic">Change Password</span> 
+                <input type="password" required placeholder="Current PassWord"> <br>
+                <input type="text"  required name="" id="" placeholder="New Password"> <br>
+                <input type="text" name="" placeholder="Re-type the same password"> <br>
+                <button>Change</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/js/app.js"></script>
