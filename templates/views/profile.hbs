@@ -86,27 +86,65 @@
         <div class="horizantalline"></div>
 
         <div class="bio-update-div">
-               <form action="">
-                <span class="topic">Update User Info</span> 
-               <div class="form">
-                <input type="text" name="" id="" placeholder="User Name"> <br>
-                Update your bio :-
-                <textarea name="" id="" cols="" rows=""></textarea> <br>
+            <form action="">
+                <div class="form">
+                    <span class="topic">Update User Info</span>
+                    <input type="text" name="" id="" placeholder="User Name"> <br>
+                    <textarea name="" id="" placeholder="Enter your Bio"></textarea> <br>
+                    <button>Update</button>
+
                 </div>
             </form>
         </div>
         <div class="forget-password-div">
             <form action="">
                 <div class="form">
-                <span class="topic">Change Password</span> 
-                <input type="password" required placeholder="Current PassWord"> <br>
-                <input type="text"  required name="" id="" placeholder="New Password"> <br>
-                <input type="text" name="" placeholder="Re-type the same password"> <br>
-                <button>Change</button>
+                    <span class="topic">Change Password</span>
+                    <input type="password" required placeholder="Current PassWord"> <br>
+                    <input type="text" required name="" id="" placeholder="New Password"> <br>
+                    <input type="text" name="" placeholder="Re-type the same password"> <br>
+                    <button>Change</button>
                 </div>
             </form>
         </div>
     </div>
+
+
+
+    {{!-- ============================================================================================================================= --}}
+    {{!-- Logout   // Delete  --}}
+    <div class="acc-div">
+        <p> Edit your Account </p>
+        <div class="hrline"></div>
+        <div class="vrline"></div>
+
+        <div class="acc-div-child-1">
+            <div class="container">
+                {{!-- <div class="acc-option-div"></div> --}}
+                <span>Delete Account</span>
+                <div><span id="warn">Warning !!</span> <br> Your Accout will be Deleted Permanently</div>
+                               <div>
+                    Are you sure want to delete Account <br>
+                <input type="checkbox" name="" id=""> Confirm Delete Account
+                </div>
+                <button class="warnbut">Delete</button>
+            </div>
+        </div>
+        <div class="acc-div-child-2">
+            <div class="container">
+                {{!-- <div class="acc-option-div"></div> --}}
+                <span>Logout</span>
+                           <div>
+                    <input type="checkbox"> Are you sure want to Logout <br>
+                <input type="checkbox" name="" id=""> Logout From All devices
+                </div>
+                <button class="logoutbut">Logout</button>
+            </div>
+
+        </div>
+
+    </div>
+    {{!-- ============================================================================================================================= --}}
 
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

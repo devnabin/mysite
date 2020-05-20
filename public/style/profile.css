@@ -1,6 +1,112 @@
 @import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
 
 
+/* =========================================================================================================== */
+/* Logout  */
+.acc-div{
+  height: 100vh;
+  display: flex;
+  background-color: white;
+}
+
+
+.hrline{
+  position: absolute;
+  height: 1px;
+  width: 40vh;
+  background-color: black;
+  margin: 5% 40%;
+}
+
+.vrline{
+    position: absolute;
+    height: 70vh;
+    width: 2px;
+    background-color: black;
+    align-self: center;
+    margin: 0 50%;
+    margin-top: 30px;
+  
+}
+
+
+.acc-div p{
+  margin-top: 30px;
+  position: absolute;
+  color: black;
+  background-color: transparent;
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+}
+
+
+.acc-div-child-1 , .acc-div-child-2 {
+  background-color: transparent;
+  width: 50%;
+}
+
+.container{
+  background-color: #e4e6eb;
+  box-shadow: 3px 3px 7px black , -3px -3px 3px white;
+  height: 400px;
+  width: 600px;
+  margin: 25% 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+
+.container span , .container div{
+  background-color: transparent;
+  text-align: center;
+}
+
+.container span{
+  font-size: 25px;
+  font-weight: bold;
+
+}
+
+.container button{
+  font-size: 13px;
+  border: 1px solid  black;
+  color: black;
+  padding: 10px;
+  font-weight: bold;
+  align-self: center;
+  width: 400px;
+}
+
+.container .logoutbut:hover{
+  background-color: black;
+  color: white;
+}
+
+
+#warn{
+  color: red;
+
+}
+
+.warnbut:hover{
+  background-color: red;
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
+/* =========================================================================================================== */
+
+
 .navmaindiv {
   display: none;
 }
@@ -9,47 +115,37 @@
 }
 
 * {
-  /* background-color: rgb(202, 202, 202); */
   background-color: rgb(240, 238, 238);
 }
 .maindiv {
-  /* margin: 100px; */
-  /* margin: 35px; */
   min-height: 100vh;
   display: flex;
-  /* background-color: aqua; */
 }
 
 /* main-child-1 */
 .main-child-1 {
   padding: 5px;
   margin: 80px 80px;
-  /* background-color: rgb(125, 106, 143); */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .main-child-1 .material-icons {
-  /* background-color: rebeccapurple; */
   font-size: 40px;
 }
 
 /* sub 2 */
 .main-child-2 {
-  /* align-self: center; */
   display: flex;
-  /* background-color: pink; */
   flex-grow: 1;
   flex-direction: column;
   align-items: center;
-  /* align-content: center; */
-  /* text-align: center; */
-  /* justify-self: flex-end; */
   justify-content: center;
 }
 
+
 .sub2-child1 {
-  /* background-color: rebeccapurple; */
   display: flex;
 }
 
@@ -70,7 +166,6 @@
 img {
   height: 200px;
   width: 200px;
-  /* border: 1px solid rgb(143, 141, 141); */
   border-radius: 50%;
 }
 
@@ -100,25 +195,19 @@ img {
   flex-direction: column;
   align-items: center;
   line-height: 1;
-  /* color: blue; */
 }
 
+
 .but .material-icons {
-  /* color: blueviolet; */
   font-size: 30px;
 }
 
+
 /* .main-child-3 */
 .main-child-3 {
-  /* background-color: blue; */
   margin: 80px 80px;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* align-content: center; */
-  /* text-align: center; */
-  /* justify-self: center; */
-  /* justify-content: space-evenly; */
 }
 
 .main-child-3 button {
@@ -127,7 +216,6 @@ img {
 
 .but {
   padding: 5px;
-  /* border-radius: 10px; */
   box-shadow: 1px 1px 3px black, -1px -1px 3px white;
 }
 .but:hover {
@@ -152,7 +240,11 @@ img {
 
 
 
+/* ---------------------------------------------------------------------------------------- */
 /* .update */
+/* down page  */
+
+
 .updatediv {
   min-height: 100vh;
   display: flex;
@@ -165,7 +257,8 @@ img {
 }
 
 
-.updatediv p {
+
+.updatediv p{
   margin-top: 30px;
   position: absolute;
   color: white;
@@ -185,8 +278,8 @@ img {
   align-self: center;
   margin: 0 50%;
   margin-top: 30px;
-  /* box-shadow: 2px 2px 6px black , -2px -2px 6px black; */
 }
+
 
 .horizantalline{
   position: absolute;
@@ -197,52 +290,46 @@ img {
 }
 
 
-.bio-update-div {
+
+
+
+.forget-password-div , .bio-update-div {
   background-color: transparent;
   width: 50%;
 }
-
-.forget-password-div {
-  background-color: transparent;
-  width: 50%;
-}
-
 
 
 
 /* forms */
  form {
   background-color: #c7c7c76c;
-  /* background-color: aliceblue; */
   border: 1px solid ffffff6c;
   height: 500px;
   width: 400px;
   margin: 150px 1px 1px 150px;
-  /* color: rgb(44, 44, 44); */
   color: white;
   display: flex;
 }
 
+
+
 .form{
   background-color: transparent;
-  /* background-color: aqua; */
-  /* position: relative; */
-
   margin-top: 100px;
   margin:  50px 0 ;
-  /* margin-top: 10px; */
   width: 100%;
 }
-form input{
+
+
+form input , textarea{
   text-align: left;
   color: white;
   padding :10px;
-  /* background-color: aqua; */
   border-bottom: 1px solid white;
   margin: 30px 50px;
-  /* margin: 50px 0 0 0 ; */
   width: 70%;
 }
+
 
 .topic{
   font-size: 20px;
@@ -251,34 +338,37 @@ form input{
   padding :10px;
   margin: 30px 50px;
   margin-bottom: 10px;
-  /* border-bottom: 1px solid white; */
 }
+
+
 form button{
    color: white;
    padding :10px;
-
   border: 1px solid white;
   margin: 30px 50px;
   width: 75%;
 }
+
+
 form button:hover{
-/* color: #575D60; */
-background-color: #575D60;
-
+background-color: white;
+color: black;
 }
 
-form input::placeholder{
+
+
+form input::placeholder , textarea::placeholder{
   color: rgb(142, 142, 143);
+  font-size: 15px;
 }
 
-/* .topic{
-  border-radius: 10px;
-  border-bottom: 1px solid white;
-  border-left: 1px solid white;
-  border-right: 1px solid white;
+
+textarea {
+  color: white;
   background-color: transparent;
-   text-align: center;
-   padding: 10px;
-   margin: 100% 25%;
-   font-size: 20px;
-} */
+  height: 100px;
+  resize: none;
+  outline: none;
+  border: 1px solid white;
+
+}
