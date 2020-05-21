@@ -86,12 +86,12 @@
         <div class="horizantalline"></div>
 
         <div class="bio-update-div">
-            <form action="">
+            <form action="" id="updateform">
                 <div class="form">
                     <span class="topic">Update User Info</span>
-                    <input type="text" name="" id="" placeholder="User Name"> <br>
-                    <textarea name="" id="" placeholder="Enter your Bio"></textarea> <br>
-                    <button>Update</button>
+                    <input type="text" name="" required placeholder="User Name" id="newUserName"> <br>
+                    <textarea name="" required placeholder="Enter your Bio" id="bio"></textarea> <br>
+                    <button type="submit">Update</button>
 
                 </div>
             </form>
@@ -101,9 +101,9 @@
                 <div class="form">
                     <span class="topic">Change Password</span>
                     <input type="password" required placeholder="Current PassWord"> <br>
-                    <input type="text" required name="" id="" placeholder="New Password"> <br>
-                    <input type="text" name="" placeholder="Re-type the same password"> <br>
-                    <button>Change</button>
+                    <input type="password" required name="" id="" placeholder="New Password"> <br>
+                    <input type="password" name="" placeholder="Re-type the same password"> <br>
+                    <button type="submit">Change</button>
                 </div>
             </form>
         </div>
@@ -123,9 +123,9 @@
                 {{!-- <div class="acc-option-div"></div> --}}
                 <span>Delete Account</span>
                 <div><span id="warn">Warning !!</span> <br> Your Accout will be Deleted Permanently</div>
-                               <div>
+                <div>
                     Are you sure want to delete Account <br>
-                <input type="checkbox" name="" id=""> Confirm Delete Account
+                    <input type="checkbox" name="" id=""> Confirm Delete Account
                 </div>
                 <button class="warnbut">Delete</button>
             </div>
@@ -134,11 +134,11 @@
             <div class="container">
                 {{!-- <div class="acc-option-div"></div> --}}
                 <span>Logout</span>
-                           <div>
-                    <input type="checkbox"> Are you sure want to Logout <br>
-                <input type="checkbox" name="" id=""> Logout From All devices
+                <div>
+                    <input type="checkbox" id="log-out"> Are you sure want to Logout <br>
+                    <input type="checkbox" required name="" id="log-out-all"> Logout From All devices
                 </div>
-                <button class="logoutbut">Logout</button>
+                <button id="logoutbut">Logout</button>
             </div>
 
         </div>

@@ -1,10 +1,12 @@
 const User = require("../database/model/Usermodel");
 const jwt = require("jsonwebtoken");
 
-async function auth(req, res, next) {
+const auth = async (req, res, next) =>{
   const token = await req.cookies.token;
   if (!token) {
     req.reject = true;
+    // console.log('please auth')
+    // throw new Error('Please auth')
     next();
   } else {
     const decode = jwt.verify(token, "nokianabin");

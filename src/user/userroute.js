@@ -12,6 +12,7 @@ router.get("/login", (req, res) => {
   }  
 });
 
+
 //Login post
 router.post("/login", async (req, res) => {
   try {
@@ -31,9 +32,9 @@ router.post("/login", async (req, res) => {
   }
 });
 
+
 //register Page
 router.get("/register",auth , (req, res) => {
-
 if(!req.reject) {
   res.send('Please Log out First')
 }else{
@@ -41,6 +42,8 @@ if(!req.reject) {
 }
 
 });
+
+
 
 router.post("/register", async (req, res) => {
   if(req.cookies.token) return res.send('Please logout First')
