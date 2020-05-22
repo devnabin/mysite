@@ -3,35 +3,75 @@ const router = new express.Router();
 const auth = require('../auth/auth')
 
 
-router.get("/me", auth ,  (req, res) => {
-  if (req.reject) return res.send("Please logout First");
-  res.render("profile",req.user);
+
+router.get("/me" ,  (req, res) => {
+  res.render("profile");
 });
 
-router.patch('/me/update', auth ,async (req,res)=>{
- console.log(req.body)
- res.status(200).send(req.body)
+router.get("/user" ,auth ,  (req, res) => {
+res.send(req.user)
+});
+
+
+
+
+router.patch('/user/update', auth ,async (req,res)=>{
+  const toUpdate = Object.keys(req.body)
+  const allowUpdate = ['name' , 'bio' ,'password']
+  const allUpdate = toUpdate.every(args => allowUpdate.includes(args))
+  if(!allUpdate){
+  res.status(400).send('bad update request')
+  }
+ if(toUpdate.includes('password')){
+   console.log('i m include')
+ }
+ try {
+  console.log(req.body)
+
+    toUpdate.forEach(args => {
+     req.user[args] = req.body[args]
+   })
+   await req.user.save()
+      res.status(200).send(req.user)
+ } catch (error) {
+   res.status(400).send(error)
+ }
 })
 
 
 
-router.post("/me/logout", auth, async (req, res) => {
+router.post("/user/logout", auth, async (req, res) => {
   try {
-    req.user.tokens = [];
+    console.log('logout')
+    req.user.tokens =await req.user.tokens.filter(args => args.token !== req.token)
+    console.log('hello ' , req.user)
     await req.user.save();
-    res.status(200).send("All User logout");
+    res.status(200).send(req.user);
   } catch (error) {}
 });
 
-router.post("/me/logouts", auth, async (req, res) => {
+
+
+router.post("/user/logouts", auth, async (req, res) => {
   try {
+    console.log('logouts')
+
     req.user.tokens = [];
     await req.user.save();
-    res.status(200).send("All User logout");
+    res.status(200).send(req.user);
   } catch (error) {
     res.send(error)
   }
 });
 
+
+router.delete('/user/delete' , auth , async (req,res)=>{
+  try {
+    await req.user.remove();
+    res.status(200).send(req.user)
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 module.exports = router;

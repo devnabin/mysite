@@ -1,4 +1,3 @@
-
 const goBack = document.getElementById("return");
 const menu = document.getElementById("menu");
 const logout = document.getElementById("logout");
@@ -39,69 +38,120 @@ update.addEventListener("click", () => {
 
 
 
-const form = document.querySelector("form");
-form.addEventListener("submit", (e) => {
-const newName = document.getElementById('newUserName').value 
-const bio = document.getElementById('bio').value 
-console.log(newName ,bio)
-const  url = `http://localhost:3000/me/update`
-const data ={
-  newName ,
-  bio
-}
-fetch(url, {
-  method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
-  headers: {
-    'Content-Type': 'application/json',
-    'Authentication' : 'Barer tokensdafasdf123'
-    // 'Accept': 'application/json'
-    // 'Content-Type': 'application/x-www-form-urlencoded',
-  },
-     body: JSON.stringify(data) // body data type must match "Content-Type" header
-})
 
-.then(data => {
-  console.log(data)
-  if(data.status == 200){
-    console.log('ok data is good')
+
+//logout user and from all devices 
+const logoutbut = document.getElementById("logoutbut");
+logoutbut.addEventListener("click", () => {
+  const one = document.getElementById("log-out").checked;
+  const two = document.getElementById("log-out-all").checked;
+  if (one && two) {
+    const url = `/user/logouts`;
+    const method = "POST";
+    makeReq(url, method)
+      .then((data) => {
+        console.log(data);
+        localStorage.removeItem("key");
+        window.location.href = "/";
+      })
+      .catch((error) => console.log(error));
+  } else if (one || two) {
+    const url = `/user/logout`;
+    const method = "POST";
+    makeReq(url, method)
+      .then((data) => {
+        console.log(data);
+        localStorage.removeItem("key");
+        window.location.href = "/";
+      })
+      .catch((error) => console.log(error));
   }
-    return data.json(); // JSON data parsed by `response.json()` call
-  })
-  .then(data =>{
-    if(data.status == 200){
-      console.log('ok data is good')
-    }
-     console.log(data)
-  })
-.catch(error => console.log(error))
-
-
-  e.preventDefault();
 });
 
 
 
-//logout
-const logoutbut = document.getElementById('logoutbut')
-logoutbut.addEventListener('click' ,()=>{
-  const one = document.getElementById('log-out').checked
-  const two =document.getElementById('log-out-all').checked
-  if(one && two){
-    const  url = `http://localhost:3000/me/logouts`
-    fetch(url, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    }).then(res =>{
-      console.log(res)
-      return res.json()
-    })
-    .then(data => console.log(data))
-    .catch(error => console.log(error))
+
+//delete Accoutn
+const deleteAcc = document.getElementById('deletebut')
+deleteAcc.addEventListener('click' , ()=>{
+  const chk = document.getElementById("delete-account").checked;
+  if(chk){
+    const url = `/user/delete`;
+    const method = "DELETE";
+    makeReq(url, method)
+      .then((data) => {
+        console.log(data);
+        localStorage.removeItem("key");
+        window.location.href = "/";
+      })
+      .catch((error) => console.log(error));
+
   }
-  console.log(one ,two)
+
 })
 
-// document.querySelector('.messageCheckbox').checked;
 
 
+//password
+document.getElementById('makePassChange').addEventListener('click' , (e)=>{
+  const oldpass = document.getElementById('oldpass').value 
+  const newpass1 = document.getElementById('newpass1').value 
+  const newpass2 = document.getElementById('newpass2').value 
+  if(oldpass && newpass1 && newpass2 ){
+    console.log(oldpass , newpass1  , newpass2)
+    if(newpass1 === newpass2){
+      const url = `/user/update`;
+      const method = "PATCH";
+      const data ={ password :{
+        oldpass,
+        newpass1
+      },
+      name : 'salina gomez' , 
+      bio : "hello World" ,
+      chk : 'ahsdfk'
+      }
+      makeReq(url, method , data)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) =>console.log(error));
+    }else{
+      console.log('please enter the same Password')
+    }
+
+  }else{
+    console.log('error')
+  }
+e.preventDefault()
+})
 
 
+async function makeReq(url, method , data = {}) {
+  try {
+  const response = await fetch(url, {
+    method,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${x}`,
+    },
+    body: JSON.stringify(data) 
+  });
+  return response.json();
+    
+  } catch (error) {
+   return error.json();
+  }
+    
+}
+
+/* async function makeReq(url, method) {
+  const response = await fetch(url, {
+    method,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${x}`,
+    },
+  });
+  return response.json();
+}
+ */

@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+  bio :{
+    type : String,
+    minlength : 20,
+  }
 });
 
 userSchema.methods.jwtoken = async function() {

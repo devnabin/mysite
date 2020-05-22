@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
 
 
+
 /* =========================================================================================================== */
 /* Logout  */
 .acc-div{
@@ -79,7 +80,7 @@
   width: 400px;
 }
 
-.container .logoutbut:hover{
+.container #logoutbut:hover{
   background-color: black;
   color: white;
 }
@@ -90,7 +91,7 @@
 
 }
 
-.warnbut:hover{
+#deletebut:hover{
   background-color: red;
   color: white;
 }

@@ -25,9 +25,7 @@ form.addEventListener("submit", (e) => {
       .then((response) => {
         console.log(response.data.token)
         console.log(typeof response.data.token)
-        document.cookie = `token=${response.data.token} ; expires=Thu, 18 Dec 2025 12:00:00 UTC`;
-    /*     const h = new Headers()
-        h.append('Authorization', `Bearer ${response.data.token}`); */
+        localStorage.setItem('key' , response.data.token)
         window.location.href = '/'
       })
       .catch((error) => {

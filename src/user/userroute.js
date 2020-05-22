@@ -5,11 +5,7 @@ const auth = require('../auth/auth')
 
 //Login Page
 router.get("/login", (req, res) => {
-  if(req.cookies.token){
-    res.send('Please Log out First')
-  } else{
-    res.render("login");
-  }  
+  res.render("login");
 });
 
 
@@ -34,21 +30,16 @@ router.post("/login", async (req, res) => {
 
 
 //register Page
-router.get("/register",auth , (req, res) => {
-if(!req.reject) {
-  res.send('Please Log out First')
-}else{
-  res.render("register");
-}
+router.get("/register" , (req, res) => {
 
+  res.render("register");
 });
 
 
 
 router.post("/register", async (req, res) => {
-  if(req.cookies.token) return res.send('Please logout First')
+  // if(req.cookies.token) return res.send('Please logout First')
   try {
-    console.log("asdf");
     const user = await User(req.body);
     await user.save();
     res.status(201).send(user);

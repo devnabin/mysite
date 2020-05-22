@@ -77,7 +77,7 @@
         </div>
     </div>
     {{>footer}}
-
+ 
     {{!-- -------------------------------- update ------------------------------------------------- --}}
 
     <div class="updatediv">
@@ -91,7 +91,7 @@
                     <span class="topic">Update User Info</span>
                     <input type="text" name="" required placeholder="User Name" id="newUserName"> <br>
                     <textarea name="" required placeholder="Enter your Bio" id="bio"></textarea> <br>
-                    <button type="submit">Update</button>
+                    <button type="submit" id="makeupdate">Update</button>
 
                 </div>
             </form>
@@ -100,10 +100,10 @@
             <form action="">
                 <div class="form">
                     <span class="topic">Change Password</span>
-                    <input type="password" required placeholder="Current PassWord"> <br>
-                    <input type="password" required name="" id="" placeholder="New Password"> <br>
-                    <input type="password" name="" placeholder="Re-type the same password"> <br>
-                    <button type="submit">Change</button>
+                    <input type="password" required id="oldpass" placeholder="Current PassWord"> <br>
+                    <input type="password" required name="" id="newpass1" placeholder="New Password"> <br>
+                    <input type="password" name="" id="newpass2" placeholder="Re-type the same password"> <br>
+                    <button type="submit" id="makePassChange">Change</button>
                 </div>
             </form>
         </div>
@@ -125,9 +125,9 @@
                 <div><span id="warn">Warning !!</span> <br> Your Accout will be Deleted Permanently</div>
                 <div>
                     Are you sure want to delete Account <br>
-                    <input type="checkbox" name="" id=""> Confirm Delete Account
+                    <input type="checkbox" name="" id="delete-account"> Confirm Delete Account
                 </div>
-                <button class="warnbut">Delete</button>
+                <button id="deletebut">Delete</button>
             </div>
         </div>
         <div class="acc-div-child-2">
@@ -138,11 +138,9 @@
                     <input type="checkbox" id="log-out"> Are you sure want to Logout <br>
                     <input type="checkbox" required name="" id="log-out-all"> Logout From All devices
                 </div>
-                <button id="logoutbut">Logout</button>
+                <button id="logoutbut" class="">Logout</button>
             </div>
-
         </div>
-
     </div>
     {{!-- ============================================================================================================================= --}}
 

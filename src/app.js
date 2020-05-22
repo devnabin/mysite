@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
+const auth = require('./auth/auth')
 //cookieParser
 var cookieParser = require('cookie-parser')
 
@@ -53,10 +54,9 @@ hbs.registerPartials(partialsPath)
 
 
 //Home page
-app.get('/', (req,res)=>{
-  res.render('index' ,{
-    alink : "Login 😁",
-  });
+
+app.get('/' , (req,res)=>{
+  res.render('index');
 })
 
 
@@ -65,10 +65,3 @@ app.get('/', (req,res)=>{
 
 app.listen(3000, ()=> console.log('App is listern on port 3000'));
 
-
-
-
-/* 
-cookies
-var cookie = req.cookies.token;
-console.log('register  ' ,req.cookies  , cookie) */
