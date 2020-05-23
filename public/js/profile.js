@@ -36,11 +36,7 @@ update.addEventListener("click", () => {
   });
 });
 
-
-
-
-
-//logout user and from all devices 
+//logout user and from all devices
 const logoutbut = document.getElementById("logoutbut");
 logoutbut.addEventListener("click", () => {
   const one = document.getElementById("log-out").checked;
@@ -55,7 +51,7 @@ logoutbut.addEventListener("click", () => {
         window.location.href = "/";
       })
       .catch((error) => console.log(error));
-  } else if (one || two) {
+  } else if (one) {
     const url = `/user/logout`;
     const method = "POST";
     makeReq(url, method)
@@ -68,14 +64,11 @@ logoutbut.addEventListener("click", () => {
   }
 });
 
-
-
-
 //delete Accoutn
-const deleteAcc = document.getElementById('deletebut')
-deleteAcc.addEventListener('click' , ()=>{
+const deleteAcc = document.getElementById("deletebut");
+deleteAcc.addEventListener("click", () => {
   const chk = document.getElementById("delete-account").checked;
-  if(chk){
+  if (chk) {
     const url = `/user/delete`;
     const method = "DELETE";
     makeReq(url, method)
@@ -85,68 +78,108 @@ deleteAcc.addEventListener('click' , ()=>{
         window.location.href = "/";
       })
       .catch((error) => console.log(error));
-
   }
-
-})
-
-
+});
 
 //password
-document.getElementById('makePassChange').addEventListener('click' , (e)=>{
-  const oldpass = document.getElementById('oldpass').value 
-  const newpass1 = document.getElementById('newpass1').value 
-  const newpass2 = document.getElementById('newpass2').value 
-  if(oldpass && newpass1 && newpass2 ){
-    console.log(oldpass , newpass1  , newpass2)
-    if(newpass1 === newpass2){
+document.getElementById("makePassChange").addEventListener("click", (e) => {
+  const oldpass = document.getElementById("oldpass").value;
+  const newpass1 = document.getElementById("newpass1").value;
+  const newpass2 = document.getElementById("newpass2").value;
+  if (oldpass && newpass1 && newpass2) {
+    console.log(oldpass, newpass1, newpass2);
+    if (newpass1 === newpass2) {
       const url = `/user/update`;
       const method = "PATCH";
-      const data ={ password :{
-        oldpass,
-        newpass1
-      },
-      name : 'salina gomez' , 
-      bio : "hello World" ,
-      chk : 'ahsdfk'
-      }
-      makeReq(url, method , data)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) =>console.log(error));
-    }else{
-      console.log('please enter the same Password')
+      const data = {
+        password: {
+          oldpass,
+          newpass1,
+        },
+      };
+      makeReq(url, method, data)
+        .then((data) => {
+          //=================
+          const makeurl = `/user/logout`;
+          const makemethod = "POST";
+          makeReq(makeurl, makemethod)
+            .then((data) => {
+              localStorage.removeItem("key");
+              window.location.href = "/";
+            })
+            .catch((error) => console.log(error));
+          //=======
+        })
+        .catch((error) => console.log(error));
+    } else {
+      console.log("please enter the same Password");
     }
-
-  }else{
-    console.log('error')
+  } else {
+    console.log("error");
   }
-e.preventDefault()
-})
+  e.preventDefault();
+});
 
+//bio and username
+document.getElementById("makeupdate").addEventListener("click", (e) => {
+  const newUser = document.getElementById("newUserName").value;
+  const bio = document.getElementById("bio").value;
+  console.log(newUser, bio);
+  if (bio.length <= 20) {
+    return alert(`bio should be greater then 20 digits`);
+  }
+  if (newUser) {
+    alert(`Changing User name is currently unavailbale`);
+  }
 
-async function makeReq(url, method , data = {}) {
+  if (newUser || bio) {
+    const url = `/user/update`;
+    const method = "PATCH";
+    const data = {
+      bio,
+    };
+    makeReq(url, method, data)
+      .then((data) => {
+        window.location.href = "/me";
+      })
+      .catch((error) => console.log(error));
+  }
+  e.preventDefault();
+});
+
+async function makeReq(url, method, data = {}) {
   try {
-  const response = await fetch(url, {
-    method,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${x}`,
-    },
-    body: JSON.stringify(data) 
-  });
-  return response.json();
-    
+    const response = await fetch(url, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${x}`,
+      },
+      body: JSON.stringify(data),
+    });
+    return response.json();
   } catch (error) {
-   return error.json();
+    console.log(error);
   }
-    
 }
 
-/* async function makeReq(url, method) {
+//load  or show value to the browser
+
+if (x) {
+  getRes("/user")
+    .then((res) => {
+      document.getElementById("name").textContent = res.name;
+      document.getElementById("email").textContent = res.email;
+      document.querySelector(".sub2-child2 p").textContent = res.bio;
+
+      // document.getElementById('name').textContent = res.name
+    })
+    .catch((error) => console.log(error));
+}
+
+async function getRes(url, data = {}) {
   const response = await fetch(url, {
-    method,
+    method: "GET", // *GET, POST, PUT, DELETE, etc.
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${x}`,
@@ -154,4 +187,3 @@ async function makeReq(url, method , data = {}) {
   });
   return response.json();
 }
- */

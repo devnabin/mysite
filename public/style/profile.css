@@ -156,13 +156,18 @@
   width: 500px;
 }
 
+.sub2-child2 p{
+background-color: white;
+text-align: center;
+}
+
 .maininfo {
   align-self: center;
   margin-left: 10px;
   line-height: 1.5;
 }
 .maininfo p {
-  line-height: 0.8;
+  line-height: 1.5;
 }
 img {
   height: 200px;

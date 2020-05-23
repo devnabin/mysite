@@ -65,3 +65,12 @@ app.get('/' , (req,res)=>{
 
 app.listen(3000, ()=> console.log('App is listern on port 3000'));
 
+
+
+
+
+ //cookies
+  // res.cookie("keytestval", '1234');
+  //res.clearCookie("keytestval");
+  
+

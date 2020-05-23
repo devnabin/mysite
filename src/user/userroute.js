@@ -19,6 +19,7 @@ router.post("/login", async (req, res) => {
       res.status(400).send("Incorrect password");
     } else {
       const token = await user.jwtoken();
+      res.cookie("coo-key", `${token}`);
       res.status(200).send({ user, token });
     }
   } catch (error) {
