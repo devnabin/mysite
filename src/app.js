@@ -21,10 +21,12 @@ app.use(cookieParser())   //cookieParser
 //Routs
 const userlogs = require('./user/userroute') //user
 const profile = require('./user/profileroute') //Profile
+const task = require('./user/taskroute') //for task
 
 
 app.use(userlogs)
 app.use(profile)
+app.use(task)
 
 
 //Paths
