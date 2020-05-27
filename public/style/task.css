@@ -1,0 +1,171 @@
+* {
+  box-sizing: border-box;
+}
+
+.title {
+  background-color: black;
+  margin-bottom: 20px;
+}
+
+.title p {
+  text-align: center;
+  font-weight: bolder;
+  font-size: 30px;
+  color: white;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.task {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+.addtask {
+  display: flex;
+  height: 40px;
+  width: 30%;
+  border-radius: 50px;
+}
+
+.addtask input {
+  margin-left: 30px;
+  flex-grow: 1;
+  padding: 0;
+  font-size: 15px;
+  border-radius: 50px;
+  box-shadow: 3px 3px 10px rgb(141, 141, 141);
+  display: flex;
+  transition: 3s;
+}
+
+.addtask input:focus {
+  box-shadow: -3px -3px 10px black;
+}
+
+.addtask button {
+  display: flex;
+  justify-content: center;
+  width: 10%;
+  border-radius: 20px;
+  color: black;
+  margin-left: 15px;
+  box-shadow: 3px 3px 10px rgb(141, 141, 141);
+  transition: 0.3s ease-in;
+}
+
+.addtask button:hover {
+  background-color: black;
+  color: white;
+}
+
+.addtask button .material-icons {
+  font-size: 30px;
+}
+
+/* Displaying taskes for the user  */
+/* Displaying taskes for the user  */
+/* Displaying taskes for the user  */
+/* Displaying taskes for the user  */
+
+.showtask {
+  /* background: rgb(255, 8, 8); */
+  margin-top: 100px;
+  height: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.showtask-child {
+  width: 700px;
+  height: auto;
+  position: relative;
+  /* box-shadow: 0 0 8px 1px #9f7eec; */
+  box-shadow: 0 0 5px 1px rgb(136, 136, 136);
+}
+
+.current-task {
+
+}
+
+.completed-task {
+}
+
+.notify-div {
+  position: absolute;
+  top: -40px;
+  margin: 0 40%;
+  width: 20%;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 0 5px 0;
+  border-radius: 50px;
+  box-shadow: 1px 1px 4px black;
+  position: relative;
+}
+
+.notify-div span {
+  font-size: 14px;
+  background-color: black;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  top: -10px;
+}
+
+.mytask {
+  padding: 2px 15px 2px 15px;
+  margin: 10px 10px 10px 10px;
+  border-bottom: 1px solid black;
+  display: flex;
+  height: 30px;
+  cursor: pointer;
+  transition: 0.1s ease;
+}
+.mytask:hover{
+  background: rgb(109, 107, 107);
+  /* background-color: black; */
+  color: white;
+ 
+
+}
+
+.mytask div {
+  width: 60%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* background-color: #9f7eec; */
+}
+
+.mytask .task-content {
+  margin: 0 0 0 10px;
+}
+
+.mytask .del-but {
+  margin-left: 40px;
+  display: none;
+  cursor: pointer;
+  transition: 0.5s ease-out;
+
+}
+
+.mytask:hover button {
+  display: block;
+  color: white;
+}
+
+/* .mytask .del:hover{
+  color: pink;
+  transform: translateX(130px);
+} */
+
+.mytask .crt:hover{
+  color: white;
+  transform: rotate(360deg);
+}

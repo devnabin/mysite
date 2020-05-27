@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/task.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {{>nav}}
+
+    <div class="bodydiv">
+        <div class="title">
+            <p> MY TASK</p>
+        </div>
+        <div class="task">
+            <div class="addtask">
+                <input type="text" value="" placeholder="Add task" id="task">
+                <button id="addtask-button">
+                    <span class="material-icons">
+                        add
+                    </span>
+                </button>
+            </div>
+        </div>
+
+
+        <div class="showtask">
+            <div class="current-task showtask-child">
+                {{!-- nofiy div  --}}
+                <div class="notify-div">current-task<span>9</span></div>
+
+                {{!-- showing task with delete and update but  --}}
+
+                {{!-- This is the sample --}}
+
+
+
+             <div class="mytask">
+                    <div> <span class="task-content">1</span>. <span class="task-content">Goto Bedroom</span> </div>
+                    <button class="del-but crt">
+                        <span class="material-icons crt-but">
+                            create
+                        </span>
+                    </button>
+                    <button class="del-but del">
+                        <span class="material-icons">
+                            delete
+                        </span>
+                    </button>
+                </div>
+
+
+
+            </div> {{!-- <div class="current-task showtask-child"></div> --}}
+
+            <div class="completed-task showtask-child">
+
+                <div class="notify-div">current-task<span>3</span></div>
+
+                {{!-- showing task with delete and update but  --}}
+                <div class="mytask">
+                    <div> <span class="task-content">1</span>. <span class="task-content">Goto Bedroom</span> </div>
+                    <button class="del-but">
+                        <span class="material-icons">
+                            history
+                        </span>
+                    </button>
+                    <button class="del-but">
+                        <span class="material-icons">
+                            delete
+                        </span>
+                    </button>
+                </div>
+
+                <div class="mytask">
+                    <div> <span class="task-content">1</span>. <span class="task-content">Goto Bedroom</span> </div>
+                    <button class="del-but">
+                        <span class="material-icons">
+                            history
+                        </span>
+                    </button>
+                    <button class="del-but">
+                        <span class="material-icons">
+                            delete
+                        </span>
+                    </button>
+                </div>
+                
+                <div class="mytask">
+                    <div> <span class="task-content">1</span>. <span class="task-content">Goto Bedroom</span> </div>
+                    <button class="del-but">
+                        <span class="material-icons">
+                            history
+                        </span>
+                    </button>
+                    <button class="del-but">
+                        <span class="material-icons">
+                            delete
+                        </span>
+                    </button>
+                </div>
+
+                <div class="mytask">
+                    <div> <span class="task-content">1</span>. <span class="task-content">Goto Bedroom</span> </div>
+                    <button class="del-but">
+                        <span class="material-icons">
+                            history
+                        </span>
+                    </button>
+                    <button class="del-but">
+                        <span class="material-icons">
+                            delete
+                        </span>
+                    </button>
+                </div>
+
+
+            </div>   {{!-- completed-task showtask --}}
+        </div>
+    </div>
+    {{>footer}}
+</body>
+
+<script src="/js/app.js">    </script>
+<script src="/js/task.js"> </script>
+
+
+
+</html>

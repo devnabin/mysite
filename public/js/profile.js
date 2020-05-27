@@ -1,8 +1,17 @@
 const goBack = document.getElementById("return");
 const menu = document.getElementById("menu");
 const logout = document.getElementById("logout");
-const update = document.getElementById("update");
+const task = document.getElementById("task");
 const deleteAccout = document.getElementById("deleteAccount");
+
+
+
+task.addEventListener('click' , ()=>{
+window.location.href = 'me/task'
+})
+
+
+
 
 //1
 //return go back
