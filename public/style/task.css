@@ -47,6 +47,7 @@
   display: flex;
   justify-content: center;
   width: 10%;
+  height: 100%;
   border-radius: 20px;
   color: black;
   margin-left: 15px;
@@ -59,8 +60,10 @@
   color: white;
 }
 
-.addtask button .material-icons {
+.addtask button span {
+  align-self: center;
   font-size: 30px;
+  font-weight: bolder;
 }
 
 /* Displaying taskes for the user  */
@@ -84,10 +87,10 @@
   position: relative;
   /* box-shadow: 0 0 8px 1px #9f7eec; */
   box-shadow: 0 0 5px 1px rgb(136, 136, 136);
+  transition: 2s ease-in;
 }
 
 .current-task {
-
 }
 
 .completed-task {
@@ -127,12 +130,11 @@
   cursor: pointer;
   transition: 0.1s ease;
 }
-.mytask:hover{
-  background: rgb(109, 107, 107);
-  /* background-color: black; */
-  color: white;
- 
 
+.mytask:hover {
+  box-shadow: 0 0 4px 1px #ae72ff;
+  color: black;
+  font-weight: bolder;
 }
 
 .mytask div {
@@ -140,32 +142,23 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* background-color: #9f7eec; */
 }
 
 .mytask .task-content {
   margin: 0 0 0 10px;
 }
 
-.mytask .del-but {
+.mytask .action-but {
   margin-left: 40px;
-  display: none;
   cursor: pointer;
   transition: 0.5s ease-out;
-
 }
 
 .mytask:hover button {
-  display: block;
-  color: white;
+  color: black;
 }
 
-/* .mytask .del:hover{
-  color: pink;
-  transform: translateX(130px);
-} */
-
-.mytask .crt:hover{
-  color: white;
+.mytask .crt:hover {
+  color: black;
   transform: rotate(360deg);
 }
