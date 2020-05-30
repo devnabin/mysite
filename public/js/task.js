@@ -97,11 +97,11 @@ let uiController = (function () {
     let html, newhtml, where;
     if (taskStatus == "current") {
       html =
-        '<div class="mytask" id="mytask-%mainid%"><div><span class="task-content">%displaying-id%</span>.<span class="task-content">%task%</span></div><button class="crt"><span class="material-icons">create</span></button><button class="done"><span class="material-icons">check_circle</span></button></div>';
+        '<div class="mytask" id="mytask-%mainid%"><div><span class="task-content">%displaying-id%</span>.<span class="task-content">%task%</span></div><button class="crt edit"><span class="material-icons">create</span></button><button class="done crt"><span class="material-icons">check_circle</span></button></div>';
       where = DomStrings.currentTask;
     } else if (taskStatus == "completed") {
       html =
-        '<div class="mytask" id="mytask-%mainid%"><div><span class="task-content">%displaying-id%</span>.<span class="task-content">%task%</span></div><button class="crt"><span class="material-icons">replay</span></button><button class="del"><span class="material-icons">delete</span></button></div>';
+        '<div class="mytask" id="mytask-%mainid%"><div><span class="task-content">%displaying-id%</span>.<span class="task-content">%task%</span></div><button class="crt redo"><span class="material-icons">replay</span></button><button class="del crt"><span class="material-icons">delete</span></button></div>';
       where = DomStrings.completedTask;
     }
 
@@ -161,11 +161,14 @@ let Controller = (function (dataCtrl, uiCtrl) {
     what = e.target.parentNode.className;
     tar = e.target.parentNode.parentNode.id;
     value = tar.split("-");
-    // console.log(what)
+    // console.log(what);
     if (what) {
-      if (what.includes("edit-task")) {
+      if (what.includes("edit")) {
+
         console.log("edit-task");
-      } else if (what === "done") {
+
+      } else if (what.includes("done")) {
+
         //update data in datacontroller i.e current task to completed task
         completedTask = dataCtrl.currentToComplete(value[1]);
 
@@ -174,19 +177,18 @@ let Controller = (function (dataCtrl, uiCtrl) {
 
         //adding to completed task
         uiCtrl.displayTaskForUser(completedTask, "completed");
-      } else if (what.includes("restore-task")) {
+
+      } else if (what.includes("redo")) {
+
         console.log("restore-task");
-      } else if (what === "del") {
+
+      } else if (what.includes("del")) {
+
         //delete From data structure
-        dataController.deleteTaskFromData(value[1])
+        dataController.deleteTaskFromData(value[1]);
 
         //delete from ui
-            //making delete button animation
-            document.querySelector('.del').style.transform = 'translateX(130px)'
-            //acutally deleting from ui
-            setTimeout(()=>{
-              deletingFrom(tar);
-            },400)
+        deletingFrom(tar);       
       }
     }
 

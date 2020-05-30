@@ -172,10 +172,6 @@
   color: rgb(0, 230, 0);
 }
 
-.done:hover {
-  transform: rotate(360deg);
-}
-
 .del .material-icons{
   color: red;
 }

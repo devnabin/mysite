@@ -58,7 +58,10 @@ hbs.registerPartials(partialsPath)
 //Home page
 
 app.get('/' , (req,res)=>{
-  res.render('index');
+  // res.render('index');
+  res.send({
+    Nabin : "nabin"
+  })
 })
 
 
