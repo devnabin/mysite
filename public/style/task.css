@@ -86,7 +86,7 @@
   height: auto;
   position: relative;
   /* box-shadow: 0 0 8px 1px #9f7eec; */
-  box-shadow: 0 0 5px 1px rgb(136, 136, 136);
+  /* box-shadow: 0 0 5px 1px rgb(136, 136, 136); */
   transition: 2s ease-in;
 }
 
@@ -148,17 +148,34 @@
   margin: 0 0 0 10px;
 }
 
-.mytask .action-but {
+.mytask button {
   margin-left: 40px;
   cursor: pointer;
   transition: 0.5s ease-out;
+  /* display: none; */
 }
 
-.mytask:hover button {
-  color: black;
-}
+/* .mytask:hover button {
+  display: block;
+} */
 
 .mytask .crt:hover {
-  color: black;
   transform: rotate(360deg);
+}
+
+/* onclick ma chaiyo */
+/* .mytask .del:hover{
+  transform :translateX(130px)
+} */
+
+.done .material-icons {
+  color: rgb(0, 230, 0);
+}
+
+.done:hover {
+  transform: rotate(360deg);
+}
+
+.del .material-icons{
+  color: red;
 }

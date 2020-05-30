@@ -1,7 +1,6 @@
 //DataStructure
 let dataController = (function () {
-
-  //Constructure to give structure 
+  //Constructure to give structure
   function Task(id, data) {
     this.id = id;
     this.task = data;
@@ -9,10 +8,10 @@ let dataController = (function () {
 
   //Storing Data
   let data = {
-    task:{
-      currentTask : [],
-      completedTask : []
-    }
+    task: {
+      currentTask: [],
+      completedTask: [],
+    },
   };
 
   //Customizing to pass in function constructure
@@ -23,80 +22,140 @@ let dataController = (function () {
     } else {
       id = 0;
     }
-
     newTask = new Task(id, task);
     data.task.currentTask.push(newTask);
 
     return newTask;
   }
 
+  //mark Complete Task
+  function currentToComplete(id) {
+    let getdata = data.task.currentTask.filter((val) => val.id == id);
+    let getAnotherData = data.task.currentTask.filter((val) => val.id != id);
+    getdata = getdata[0];
+    data.task.completedTask.push(getdata);
+    data.task.currentTask = getAnotherData;
+    return getdata;
+  }
+
   //returing data
   return {
-   loadData,
-   data : data.task,
-  }
+    loadData,
+    data: data.task,
+    currentToComplete,
+  };
 })();
-
 
 //ui Controller
 let uiController = (function () {
-  
-  //id and Classes 
+  //id and Classes
   let DomStrings = {
     addTaskButton: "#addtask-button",
     inputValue: "#task",
-    currentTask : ".current-task",
+    currentTask: ".current-task",
+    completedTask: ".completed-task",
+    showtask: ".showtask",
   };
-  
-  //Get Task from input 
+
+  //Get Task from input
   let inputData = function () {
     return document.querySelector(DomStrings.inputValue).value;
   };
 
   //Display User-task in Browser
-  let displayTaskForUser = function({id , task}){
-    let html , newhtml;
-    html =  '<div class="mytask" id="mytask-%mainid%"><div> <span class="task-content">%displaying-id%</span>. <span class="task-content">%task%</span> </div><button class="action-but crt"><span class="material-icons">create</span></button><button class="action-but del"><span class="material-icons">delete</span></button></div>';
-    html = html.replace('%mainid%',id)
-    html = html.replace('%displaying-id%',id)
-    newhtml = html.replace("%task%", task);
-    document.querySelector(DomStrings.currentTask).insertAdjacentHTML("beforeend", newhtml);
-  }
+  let displayTaskForUser = function ({ id, task }, taskStatus) {
+    let html, newhtml, where;
+    if (taskStatus == "current") {
+      html =
+        '<div class="mytask" id="mytask-%mainid%"><div><span class="task-content">%displaying-id%</span>.<span class="task-content">%task%</span></div><button class="crt"><span class="material-icons">create</span></button><button class="done"><span class="material-icons">check_circle</span></button></div>';
+      where = DomStrings.currentTask;
+    } else if (taskStatus == "completed") {
+      html =
+        '<div class="mytask" id="mytask-%mainid%"><div><span class="task-content">%displaying-id%</span>.<span class="task-content">%task%</span></div><button class="crt"><span class="material-icons">replay</span></button><button class="del"><span class="material-icons">delete</span></button></div>';
+      where = DomStrings.completedTask;
+    }
 
-  //returing 
+    html = html.replace("%mainid%", id);
+    html = html.replace("%displaying-id%", id);
+    newhtml = html.replace("%task%", task);
+    document.querySelector(where).insertAdjacentHTML("beforeend", newhtml);
+  };
+
+  //
+
+  //Deleting task permanently
+  let deleteTask = function (id) {
+    let el = document.getElementById(`${id}`);
+    el.parentNode.removeChild(el);
+  };
+
+  //returing
   return {
     DomStrings,
     inputData: inputData,
     displayTaskForUser,
+    deleteTask,
   };
 })();
 
-
-
 //Controller
 let Controller = (function (dataCtrl, uiCtrl) {
-  //
+  //Dom id and Classes selector
+  const Dom = uiCtrl.DomStrings;
+
+  //main ui Event
   function runEvent() {
-    let inputData , taskObj;
-    
+    let inputData, taskObj;
+
     // 1 Get the fill inpute data
-     inputData = uiCtrl.inputData();  
-     if(!(inputData.length>=3))return alert('task name is too short')
-     
-      // 2 Add the iteam to the data controller
-     taskObj = dataCtrl.loadData(inputData)
-    
+    inputData = uiCtrl.inputData();
+    if (!(inputData.length >= 3)) return alert("task name is too short");
+    document.querySelector(Dom.inputValue).value = "";
+
+    // 2 Add the iteam to the data controller
+    taskObj = dataCtrl.loadData(inputData);
+
     // 3 Add the item to the UI
-     uiCtrl.displayTaskForUser(taskObj)
+    uiCtrl.displayTaskForUser(taskObj, "current");
 
     // 4 Calculate the budget
 
     // 5 Display the budget to the Ui
   }
 
-  //
+  //runEventToDelete
+  function runEventToDo(e) {
+    let what, tar, value, completedTask;
+    what = e.target.parentNode.className;
+    tar = e.target.parentNode.parentNode.id;
+    value = tar.split("-");
+    // console.log(what)
+    if (what) {
+      if (what.includes("edit-task")) {
+        console.log("edit-task");
+      } else if (what === "done") {
+        //update data in datacontroller i.e current task to completed task
+        completedTask = dataCtrl.currentToComplete(value[1]);
+        //removing from current task
+        deletingFrom(tar);
+        //adding to completed task
+        uiCtrl.displayTaskForUser(completedTask, "completed");
+      } else if (what.includes("restore-task")) {
+        console.log("restore-task");
+      } else if (what === "del") {
+        // uiCtrl.deleteTask(tar);
+        deletingFrom(tar);
+      }
+    }
+
+    function deletingFrom(tar) {
+      uiCtrl.deleteTask(tar);
+    }
+  }
+
+  //instilizing
   function init() {
-    const Dom = uiCtrl.DomStrings;
+    //taking task as input event
     document
       .querySelector(Dom.addTaskButton)
       .addEventListener("click", runEvent);
@@ -105,6 +164,11 @@ let Controller = (function (dataCtrl, uiCtrl) {
         runEvent();
       }
     });
+
+    //modifying taskes and make events
+    document
+      .querySelector(Dom.showtask)
+      .addEventListener("click", runEventToDo);
   }
 
   //returning
