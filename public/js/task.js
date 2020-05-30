@@ -38,11 +38,29 @@ let dataController = (function () {
     return getdata;
   }
 
+  //deleting task permanently
+  function deleteTaskFromData(id) {
+    let getAnotherData = data.task.completedTask.filter((val) => val.id != id);
+    data.task.completedTask = getAnotherData;
+  }
+
+  //number of completed and and current task
+  function countNumberOfTask() {
+    let CompletedNumber, CurrentNumber;
+    CurrentNumber = data.task.currentTask.length;
+    CompletedNumber = data.task.completedTask.length;
+    return {
+      CompletedNumber,
+      CurrentNumber,
+    };
+  }
   //returing data
   return {
     loadData,
     data: data.task,
     currentToComplete,
+    countNumberOfTask,
+    deleteTaskFromData,
   };
 })();
 
@@ -55,7 +73,19 @@ let uiController = (function () {
     currentTask: ".current-task",
     completedTask: ".completed-task",
     showtask: ".showtask",
+    current_task_count: "#current-task-count",
+    completed_task_count: "#completed-task-count",
   };
+
+  //displaying task-Count to Client
+  function displayNumberOfTask(current_count, completed_count) {
+    document.querySelector(
+      DomStrings.current_task_count
+    ).textContent = current_count;
+    document.querySelector(
+      DomStrings.completed_task_count
+    ).textContent = completed_count;
+  }
 
   //Get Task from input
   let inputData = function () {
@@ -84,7 +114,7 @@ let uiController = (function () {
   //
 
   //Deleting task permanently
-  let deleteTask = function (id) {
+  let deleteTaskFromUi = function (id) {
     let el = document.getElementById(`${id}`);
     el.parentNode.removeChild(el);
   };
@@ -94,7 +124,8 @@ let uiController = (function () {
     DomStrings,
     inputData: inputData,
     displayTaskForUser,
-    deleteTask,
+    deleteTaskFromUi,
+    displayNumberOfTask,
   };
 })();
 
@@ -117,6 +148,7 @@ let Controller = (function (dataCtrl, uiCtrl) {
 
     // 3 Add the item to the UI
     uiCtrl.displayTaskForUser(taskObj, "current");
+    ClearUI();
 
     // 4 Calculate the budget
 
@@ -136,25 +168,45 @@ let Controller = (function (dataCtrl, uiCtrl) {
       } else if (what === "done") {
         //update data in datacontroller i.e current task to completed task
         completedTask = dataCtrl.currentToComplete(value[1]);
+
         //removing from current task
         deletingFrom(tar);
+
         //adding to completed task
         uiCtrl.displayTaskForUser(completedTask, "completed");
       } else if (what.includes("restore-task")) {
         console.log("restore-task");
       } else if (what === "del") {
-        // uiCtrl.deleteTask(tar);
+        //delete From data structure
+        dataController.deleteTaskFromData(value[1])
+
+        //delete from ui
         deletingFrom(tar);
       }
     }
 
     function deletingFrom(tar) {
-      uiCtrl.deleteTask(tar);
+      uiCtrl.deleteTaskFromUi(tar);
+    }
+    ClearUI();
+  }
+
+  //Clear Ui
+  function ClearUI() {
+    let counts;
+    document.querySelector(Dom.current_task_count).textContent = "";
+    document.querySelector(Dom.completed_task_count).textContent = "";
+    counts = dataCtrl.countNumberOfTask();
+    if (counts) {
+      uiCtrl.displayNumberOfTask(counts.CurrentNumber, counts.CompletedNumber);
     }
   }
 
   //instilizing
   function init() {
+    //clear the dom Content First time
+    ClearUI();
+
     //taking task as input event
     document
       .querySelector(Dom.addTaskButton)
@@ -169,6 +221,8 @@ let Controller = (function (dataCtrl, uiCtrl) {
     document
       .querySelector(Dom.showtask)
       .addEventListener("click", runEventToDo);
+
+    //Showing task Count
   }
 
   //returning
