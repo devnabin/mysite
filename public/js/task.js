@@ -181,7 +181,12 @@ let Controller = (function (dataCtrl, uiCtrl) {
         dataController.deleteTaskFromData(value[1])
 
         //delete from ui
-        deletingFrom(tar);
+            //making delete button animation
+            document.querySelector('.del').style.transform = 'translateX(130px)'
+            //acutally deleting from ui
+            setTimeout(()=>{
+              deletingFrom(tar);
+            },400)
       }
     }
 
