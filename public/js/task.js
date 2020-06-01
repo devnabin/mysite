@@ -1,10 +1,11 @@
 //DataStructure or data module (1) ================================================================================================================
 let dataController = (function () {
   //Constructure to give structure
-  function Task(id, data) {
-    this.id = id;
-    this.task = data;
-    this.complete = false;
+  function Task(id, data, complected = false, deleted = false) {
+    this.taskid = id;
+    this.description = data;
+    this.completed = complected;
+    this.deleted = false;
   }
 
   //Storing Data || main data container
@@ -14,30 +15,12 @@ let dataController = (function () {
       completedTask: [], //contain the complected task
     },
     allCreatedtaskes: [], //its save all the taskes removed as well
+    taskid: 0,
+    create: function () {
+      this.taskid = this.allCreatedtaskes.length
+      Savedata();
+    },
   };
-
-  //adding localstorage data to data object just above
-  (() => {
-    let localdata, count;
-    //getting data from local storage
-    localdata = JSON.parse(localStorage.getItem("data"));
-    if (localdata) {
-      //count the no. of task on localstorage if there is any task then it add to the main data container
-      count = countNumberOfTask(localdata);
-      if (count.CompletedNumber > 0) {
-        //adding completed task from local storage to main data container
-        localdata.task.completedTask.forEach((element) => {
-          data.task.completedTask.push(element);
-        });
-      }
-      if (count.CurrentNumber > 0) {
-        //adding current nd remaining task from local storage to main data container
-        localdata.task.currentTask.forEach((element) => {
-          data.task.currentTask.push(element);
-        });
-      }
-    }
-  })();
 
   //this Savedata function will save the data container data to the local storage every time when its call
   function Savedata() {
@@ -46,20 +29,22 @@ let dataController = (function () {
 
   //converting the user input task into object for processing data
   function loadData(task) {
-    let id, newTask;
-    if (data.allCreatedtaskes.length > 0) {
+    let id  , newTask;
+    console.log('iasdfIIIIIIIIIIIII' , data.taskid)
+
+    if (data.taskid > 0) {
       //the number or task number of new task will be assign from the last new task
-      id = data.allCreatedtaskes[data.allCreatedtaskes.length - 1].id + 1;
+      id = data.taskid
+      data.taskid += 1;
     } else {
-      //the first task will be task 0
+      // the first task will be task 0
       id = 0;
+      data.taskid += 1;
     }
 
     newTask = new Task(id, task); //create new object for new task
     data.task.currentTask.push(newTask); //adding task to remaining task or current task
-    data.allCreatedtaskes.push(newTask); //adding task to all the task
 
-    //the the data to local storage
     Savedata();
 
     return newTask;
@@ -67,16 +52,16 @@ let dataController = (function () {
 
   //mark Complete Task || it marks the current task to completed task
   function currentToComplete(id) {
-    let getdata = data.task.currentTask.filter((val) => val.id == id);
+    let getdata = data.task.currentTask.filter((val) => val.taskid == id);
     getdata = getdata[0]; //thus filter method return array so we can get object from getdata[0] or array notation
-    let getAnotherData = data.task.currentTask.filter((val) => val.id != id);
+    let getAnotherData = data.task.currentTask.filter((val) => val.taskid != id);
     data.task.completedTask.push(getdata); //it add the that task to completed task array in data container
     data.task.currentTask = getAnotherData; //it store all the task except that task after filtering
-
-    //the the data to local storage
+    
     Savedata();
 
     return getdata;
+    
   }
 
   //deleting task permanently
@@ -84,9 +69,6 @@ let dataController = (function () {
     //its deleted  the task permanently from completed task
     let getAnotherData = data.task.completedTask.filter((val) => val.id != id);
     data.task.completedTask = getAnotherData;
-
-    //the the data to local storage
-    Savedata();
   }
 
   //this funtion return the number of completed and and current task
@@ -110,8 +92,94 @@ let dataController = (function () {
     currentToComplete,
     countNumberOfTask,
     deleteTaskFromData,
+    Task,
   };
 })();
+
+//! Server Connection or Server Module (2)=======================================================
+let serverTalk = (function (dataCtrl) {
+  //make req
+  let getdata = async function (url, method, data = {}) {
+    try {
+      // console.log(url,method,data)
+      let dummy;
+      if (method !== "GET") {
+        dummy = await fetch(url, {
+          method,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${x}`,
+          },
+          body: JSON.stringify(data),
+        });
+      } else {
+        dummy = await fetch(url, {
+          method,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${x}`,
+          },
+        });
+      }
+      dummy = await dummy.json();
+      return dummy;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const allDataInServer = function (callback) {
+    getdata("/me/mytask", "GET")
+      .then((response) => {
+        response.forEach((element) => {
+          dataCtrl.data.allCreatedtaskes.push(element);
+          if (!element.deleted) {
+            if (element.completed) {
+              dataCtrl.data.task.completedTask.push(element);
+            } else {
+              dataCtrl.data.task.currentTask.push(element);
+            }
+          }
+        });
+        dataCtrl.data.create();
+        callback(true);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const addTaskToServer = function (task) {
+    console.log(task);
+    getdata("/me/task", "POST", task)
+      .then((response) => {
+        dataCtrl.data.allCreatedtaskes.push(response);
+      })
+      .catch((error) => console.log(error));
+  };
+
+
+  const patchTask = function(id , what){
+    let task;
+    task = {}
+     if(what === 'completed'){
+       task.completed = true
+     }else if(what === 'deleted'){
+       task.deleted = true
+     }
+     console.log('task is ' , task)
+    getdata(`/me/task/${id}`, "PATCH", task)
+    .then((response) => {
+      dataCtrl.data.allCreatedtaskes.push(response);
+    })
+    .catch((error) => console.log(error));
+  }
+
+  return {
+    allDataInServer,
+    addTaskToServer,
+   patchTask,
+
+  };
+})(dataController);
 
 //ui Controller module (2) ====================================================================================================
 let uiController = (function () {
@@ -148,7 +216,8 @@ let uiController = (function () {
   };
 
   //Display User-task in Browser
-  let displayTaskForUser = function ({ id, task }, taskStatus) {
+  let displayTaskForUser = function ({ taskid, description }, taskStatus) {
+    //  console.log(taskid , description)
     let html, newhtml, where;
     if (taskStatus == "current") {
       //making html for current task filed
@@ -162,9 +231,9 @@ let uiController = (function () {
       where = DomStrings.completedTask;
     }
 
-    html = html.replace("%mainid%", id);
-    html = html.replace("%displaying-id%", id);
-    newhtml = html.replace("%task%", task);
+    html = html.replace("%mainid%", taskid);
+    html = html.replace("%displaying-id%", taskid);
+    newhtml = html.replace("%task%", description);
 
     //adding html content to browser
     document.querySelector(where).insertAdjacentHTML("beforeend", newhtml);
@@ -206,7 +275,11 @@ let Controller = (function (dataCtrl, uiCtrl) {
     uiController.clearInputFields();
 
     //Add the task to the data controller to make an object
+    console.log(inputData)
     taskObj = dataCtrl.loadData(inputData);
+
+    //saving task to the Server
+    serverTalk.addTaskToServer(taskObj);
 
     //Add the current task item to the UI
     uiCtrl.displayTaskForUser(taskObj, "current");
@@ -230,14 +303,20 @@ let Controller = (function (dataCtrl, uiCtrl) {
       if (what.includes("edit")) {
         console.log("edit-task");
       } else if (what.includes("done")) {
+        
         //update data in datacontroller i.e current task to completed task
         completedTask = dataCtrl.currentToComplete(value[1]);
 
+        //update data in server i.e current task to completed task
+        serverTalk.patchTask(value[1] , 'completed')       
+      
+      
         //removing from current task ui
         deletingFrom(tar);
 
         //after removing from current task ui adding to completed task ui
         uiCtrl.displayTaskForUser(completedTask, "completed");
+
       } else if (what.includes("redo")) {
         console.log("restore-task");
       } else if (what.includes("del")) {
@@ -252,11 +331,11 @@ let Controller = (function (dataCtrl, uiCtrl) {
     function deletingFrom(tar) {
       uiCtrl.deleteTaskFromUi(tar);
     }
-    rendringUI(false);
+    rendringUI();
   }
 
   //rendring Ui
-  function rendringUI(reRender) {
+  function rendringUI() {
     let counts;
     counts = dataCtrl.countNumberOfTask(); //getting number of current task and completed task
 
@@ -265,14 +344,16 @@ let Controller = (function (dataCtrl, uiCtrl) {
       //showing number of current task and completed task in ui
     }
 
+    /*
     if (counts.CurrentNumber == 0 && counts.CompletedNumber === 0) {
-      localStorage.removeItem("data");
+      // localStorage.removeItem("data");
+      console.log('no dat')
       //when number of current task and completed task in zero , then tha data will be removed from local storage
     }
 
     //render the current task and completed task after window or tab refresh
     //local storage > data strucutre > from the help of data structure of data container we rerender the ui just before the tab or window closed
-    if (reRender) {
+     if (reRender) {
       if (counts.CurrentNumber > 0) {
         //rendring the ui at current task
         dataCtrl.data.task.currentTask.forEach((element) =>
@@ -285,13 +366,27 @@ let Controller = (function (dataCtrl, uiCtrl) {
           uiController.displayTaskForUser(element, "completed")
         );
       }
-    }
+    } */
+  }
+
+  function rendringData(arg) {
+    serverTalk.allDataInServer((args) => {
+      if (args) {
+        dataCtrl.data.task.currentTask.forEach((element) =>
+          uiController.displayTaskForUser(element, "current")
+        );
+        dataCtrl.data.task.completedTask.forEach((element) =>
+          uiController.displayTaskForUser(element, "completed")
+        );
+      }
+      rendringUI();
+    });
   }
 
   //instilizing
   function init() {
     //rendring the previous data on open browser
-    rendringUI(true);
+    rendringData(true);
 
     //instilizing eventlistner to the browser and taking task as input event
     document
@@ -313,6 +408,6 @@ let Controller = (function (dataCtrl, uiCtrl) {
   return {
     init: init,
   };
-})(dataController, uiController);
+})(dataController, uiController, serverTalk);
 
 Controller.init();

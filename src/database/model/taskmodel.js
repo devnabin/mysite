@@ -13,7 +13,19 @@ const taskSchema = new moongoose.Schema({
     type: Boolean,
     required: true,
   },
+  deleted : {
+    type: Boolean,
+    required: true,
+    default : false
+  }
 });
+
+taskSchema.methods.toJSON = function(){
+  const taskObject = this.toObject();
+  delete taskObject._id
+  return taskObject;
+}
+
 
 const Task = moongoose.model("task", taskSchema);
 
