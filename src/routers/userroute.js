@@ -1,7 +1,7 @@
 const express = require("express");
 const router = new express.Router();
 const User = require("../database/model/Usermodel");
-const auth = require('../auth/auth')
+const auth = require('../middlewares/auth')
 
 //Login Page
 router.get("/login", (req, res) => {

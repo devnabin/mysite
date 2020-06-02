@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
-const auth = require('./auth/auth')
+const auth = require('./middlewares/auth')
 //cookieParser
 var cookieParser = require('cookie-parser')
 
@@ -19,9 +19,9 @@ app.use(cookieParser())   //cookieParser
 
 
 //Routs
-const userlogs = require('./user/userroute') //user
-const profile = require('./user/profileroute') //Profile
-const task = require('./user/taskroute') //for task
+const userlogs = require('./routers/userroute') //user
+const profile = require('./routers/profileroute') //Profile
+const task = require('./routers/taskroute') //for task
 
 
 app.use(userlogs)

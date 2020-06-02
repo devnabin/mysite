@@ -1,7 +1,7 @@
 const express = require("express");
 const router = new express.Router();
 const Task = require("../database/model/taskmodel");
-const auth = require("../auth/auth");
+const auth = require("../middlewares/auth");
 
 //show task page
 router.get("/me/task", async (req, res) => {
@@ -11,6 +11,7 @@ router.get("/me/task", async (req, res) => {
 //Create task
 router.post("/me/task", auth, async (req, res) => {
   try {
+    console.log(req.body);
     const task = await Task(req.body);
     await task.save();
     res.status(201).send(task);
@@ -42,7 +43,6 @@ router.get("/me/mytask/:id", auth, async (req, res) => {
 
 //update task
 router.patch("/me/task/:id", auth, async (req, res) => {
-
   const toUpdate = Object.keys(req.body);
   const allowUpdates = ["deleted", "completed"];
   const allUpdate = toUpdate.every((args) => allowUpdates.includes(args));
@@ -50,18 +50,18 @@ router.patch("/me/task/:id", auth, async (req, res) => {
   if (!allUpdate) {
     return res.status(404).send({ error: "Invalid updates" });
   }
-/*   if(toUpdate.includes('taskid')){
+  /*   if(toUpdate.includes('taskid')){
     delete req.body.taskid
   } */
   try {
-  // console.log(req.body)
+    // console.log(req.body)
 
     const taskid = req.params.id;
     const task = await Task.findOne({ taskid });
     toUpdate.forEach((args) => {
       task[args] = req.body[args];
     });
-    await task.save(); 
+    await task.save();
     res.status(200).send(task);
   } catch (error) {
     res.status(400).send(error);
@@ -90,6 +90,3 @@ router.delete("/me/task/:id", auth, async (req, res) => {
 });
 
 module.exports = router;
-
-
-
