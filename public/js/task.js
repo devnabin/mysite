@@ -30,7 +30,6 @@ let dataController = (function () {
   //converting the user input task into object for processing data
   function loadData(task) {
     let id  , newTask;
-    console.log('iasdfIIIIIIIIIIIII' , data.taskid)
 
     if (data.taskid > 0) {
       //the number or task number of new task will be assign from the last new task
@@ -43,7 +42,7 @@ let dataController = (function () {
     }
 
     newTask = new Task(id, task); //create new object for new task
-    data.task.currentTask.push(newTask); //adding task to remaining task or current task
+
 
     Savedata();
 
@@ -96,12 +95,11 @@ let dataController = (function () {
   };
 })();
 
-//! Server Connection or Server Module (2)=======================================================
+// Server Connection or Server Module (2)=======================================================
 let serverTalk = (function (dataCtrl) {
   //make req
   let getdata = async function (url, method, data = {}) {
     try {
-      // console.log(url,method,data)
       let dummy;
       if (method !== "GET") {
         dummy = await fetch(url, {
@@ -148,10 +146,10 @@ let serverTalk = (function (dataCtrl) {
   };
 
   const addTaskToServer = function (task) {
-    console.log(task);
     getdata("/me/task", "POST", task)
       .then((response) => {
         dataCtrl.data.allCreatedtaskes.push(response);
+        dataCtrl.data.task.currentTask.push(response);
       })
       .catch((error) => console.log(error));
   };
@@ -181,7 +179,7 @@ let serverTalk = (function (dataCtrl) {
   };
 })(dataController);
 
-//ui Controller module (2) ====================================================================================================
+//ui Controller module (3) ====================================================================================================
 let uiController = (function () {
   //id and Classes
   let DomStrings = {
@@ -258,7 +256,7 @@ let uiController = (function () {
   };
 })();
 
-//Controller module (3) ======================================================================================
+//Controller module (4) ======================================================================================
 let Controller = (function (dataCtrl, uiCtrl) {
   //Dom id and Classes selector
   const Dom = uiCtrl.DomStrings;
@@ -275,12 +273,11 @@ let Controller = (function (dataCtrl, uiCtrl) {
     uiController.clearInputFields();
 
     //Add the task to the data controller to make an object
-    console.log(inputData)
     taskObj = dataCtrl.loadData(inputData);
 
     //saving task to the Server
     serverTalk.addTaskToServer(taskObj);
-
+   
     //Add the current task item to the UI
     uiCtrl.displayTaskForUser(taskObj, "current");
     rendringUI(false);
@@ -325,6 +322,9 @@ let Controller = (function (dataCtrl, uiCtrl) {
 
         //delete from whole ui
         deletingFrom(tar);
+
+        //server make delete
+        serverTalk.patchTask(value[1] , 'deleted')
       }
     }
 
@@ -344,29 +344,6 @@ let Controller = (function (dataCtrl, uiCtrl) {
       //showing number of current task and completed task in ui
     }
 
-    /*
-    if (counts.CurrentNumber == 0 && counts.CompletedNumber === 0) {
-      // localStorage.removeItem("data");
-      console.log('no dat')
-      //when number of current task and completed task in zero , then tha data will be removed from local storage
-    }
-
-    //render the current task and completed task after window or tab refresh
-    //local storage > data strucutre > from the help of data structure of data container we rerender the ui just before the tab or window closed
-     if (reRender) {
-      if (counts.CurrentNumber > 0) {
-        //rendring the ui at current task
-        dataCtrl.data.task.currentTask.forEach((element) =>
-          uiController.displayTaskForUser(element, "current")
-        );
-      }
-      if (counts.CompletedNumber > 0) {
-        //rendring the ui at completed task
-        dataCtrl.data.task.completedTask.forEach((element) =>
-          uiController.displayTaskForUser(element, "completed")
-        );
-      }
-    } */
   }
 
   function rendringData(arg) {
