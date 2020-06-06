@@ -5,6 +5,7 @@ const auth = require("../middlewares/auth");
 
 //show task page
 router.get("/me/task", async (req, res) => {
+  if (!(req.cookies.user && req.cookies['coo-key'])) return res.render("404");
   res.render("task");
 });
 

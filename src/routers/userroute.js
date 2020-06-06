@@ -20,6 +20,7 @@ router.post("/login", async (req, res) => {
     } else {
       const token = await user.jwtoken();
       res.cookie("coo-key", `${token}`);
+      res.cookie("user", `${user.name}`);
       res.status(200).send({ user, token });
     }
   } catch (error) {

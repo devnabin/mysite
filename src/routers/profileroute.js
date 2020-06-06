@@ -4,9 +4,12 @@ const auth = require("../middlewares/auth");
 
 
 router.get("/me", (req, res) => {
+  if(!(req.cookies.user && req.cookies['coo-key'])) return res.render('404')
   res.render("profile");
 });
 
+
+//getting user data
 router.get("/user", auth, (req, res) => {
   res.send(req.user);
 });
@@ -49,6 +52,7 @@ router.post("/user/logout", auth, async (req, res) => {
     );
     await req.user.save();
     res.clearCookie("coo-key");
+    res.clearCookie("user");
     res.status(200).send(req.user);
   } catch (error) {}
 });
@@ -58,6 +62,7 @@ router.post("/user/logouts", auth, async (req, res) => {
     req.user.tokens = [];
     await req.user.save();
     res.clearCookie("coo-key");
+    res.clearCookie("user");
     res.status(200).send(req.user);
   } catch (error) {
     res.send(error);
@@ -68,6 +73,7 @@ router.delete("/user/delete", auth, async (req, res) => {
   try {
     await req.user.remove();
     res.clearCookie("coo-key");
+    res.clearCookie("user");
     res.status(200).send(req.user);
   } catch (error) {
     console.log(error);
