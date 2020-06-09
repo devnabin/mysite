@@ -12,8 +12,10 @@ router.get("/me/task", async (req, res) => {
 //Create task
 router.post("/me/task", auth, async (req, res) => {
   try {
-    console.log(req.body);
-    const task = await Task(req.body);
+    const task = await Task({
+      ...req.body,
+      owner : req.user._id
+    });
     await task.save();
     res.status(201).send(task);
   } catch (error) {
@@ -24,18 +26,20 @@ router.post("/me/task", auth, async (req, res) => {
 //Read all task
 router.get("/me/mytask", auth, async (req, res) => {
   try {
-    const alltask = await Task.find({});
-    res.status(200).send(alltask);
+    // const alltask = await Task.find({owner: req.user._id});
+    await req.user.populate('mytask').execPopulate()
+    res.status(200).send(req.user.mytask);
   } catch (error) {
     res.status(400).send(error);
   }
 });
 
+
 //Read task by id
 router.get("/me/mytask/:id", auth, async (req, res) => {
   try {
     const _id = req.params.id;
-    const task = await Task.findOne({ _id });
+    const task = await Task.findOne({ _id  , owner : req.user._id});
     res.status(200).send(task);
   } catch (error) {
     res.status(400).send(error);
@@ -58,7 +62,10 @@ router.patch("/me/task/:id", auth, async (req, res) => {
     // console.log(req.body)
 
     const taskid = req.params.id;
-    const task = await Task.findOne({ taskid });
+    const task = await Task.findOne({ taskid , owner : req.user._id });
+    
+    if (!task) return res.status(401).send();
+
     toUpdate.forEach((args) => {
       task[args] = req.body[args];
     });
@@ -83,7 +90,10 @@ router.delete("/me/task", auth, async (req, res) => {
 router.delete("/me/task/:id", auth, async (req, res) => {
   try {
     const _id = req.params.id;
-    const task = await Task.deleteOne({ _id });
+    const task = await Task.findOneAndDelete({ _id , owner : req.user._id});
+    if (!task){
+      res.status(404).send();
+    } 
     res.status(200).send(task);
   } catch (error) {
     res.status(400).send(error);

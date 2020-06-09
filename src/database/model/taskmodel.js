@@ -17,6 +17,11 @@ const taskSchema = new moongoose.Schema({
     type: Boolean,
     required: true,
     default : false
+  },
+  owner : {
+    required : true,
+    ref : 'user',
+    type : moongoose.Schema.Types.ObjectId
   }
 });
 
