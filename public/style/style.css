@@ -5,7 +5,6 @@
   font-family: "Noto Sans TC", sans-serif;
 }
 
-
 body {
   min-height: 100vh;
   display: flex;
@@ -25,19 +24,44 @@ body {
   margin-left: 10px;
 }
 
-
 /* pages or a tags in navigation */
-nav a , .loginButton{
+.loginButton {
+  color: white;
+  margin-left: 25px;
+  font-size: large;
+  text-decoration: none;
+}
+
+.loginBut {
+  border-radius: 55px;
+  background: #8179ec;
+  box-shadow: 2px 2px 10px #655eb8, -2px -2px 10px #9d94ff;
+  transition: 0.3s;
+}
+.loginBut:hover {
+  background: #3c359c;
+  box-shadow: 2px 2px 10px #655eb8, -2px -2px 10px #9d94ff;
+}
+
+nav a {
   color: black;
   margin-left: 25px;
   font-size: large;
   text-decoration: none;
 }
 
-nav a:hover {
-  border-bottom: 1px solid black;
+nav a:hover svg {
+  background-color: black;
+  color: white;
+  transition: 0.2s;
 }
 
+nav svg {
+  padding: 5px;
+  font-size: 30px;
+  margin-left: 10px;
+  border-radius: 10px;
+}
 nav {
   margin-top: 10px;
   text-align: center;
@@ -72,25 +96,23 @@ button {
   color: orangered;
 }
 
-
-.loginBut{
+.loginBut {
   display: flex;
   margin: 10px;
 }
 
-.loginButton{
+.loginButton {
   align-self: center;
 }
 
-
 /* Profile pic logo on nav bar  */
-.pp{
-margin-left: 10px;
-height: 30px;
-width: 30px;
-border-radius: 50%;
-} 
+.pp {
+  margin-left: 10px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
 
-.bodydiv{
+.bodydiv {
   flex-grow: 1;
 }
