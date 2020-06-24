@@ -19,10 +19,12 @@ app.use(cookieParser()); //cookieParser
 const userlogs = require("./routers/userroute"); //user
 const profile = require("./routers/profileroute"); //Profile
 const task = require("./routers/taskroute"); //for task
+const blog = require('./routers/blog')
 
 app.use(userlogs);
 app.use(profile);
 app.use(task);
+app.use(blog)
 
 //Paths
 const viewsPath = path.join(__dirname, "../templates/views");
