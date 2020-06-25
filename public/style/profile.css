@@ -173,7 +173,26 @@ img {
   height: 200px;
   width: 200px;
   border-radius: 50%;
+} 
+
+.profilepp{
+ text-align: center;
 }
+
+/* profile picture */
+
+#laberforinput{
+  cursor: pointer;
+}
+
+
+#upload-photo{
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
 
 .hello {
   font-weight: bold;
