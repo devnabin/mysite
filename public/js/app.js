@@ -19,3 +19,7 @@ async function getRes(url, data = {}) {
   });
   return response.json();
 }
+
+
+
+export { x }

@@ -72,3 +72,18 @@
   height: 70%;
   overflow: hidden;
 }
+
+/* errmsg */
+.errmsg {
+  padding: 5px;
+  text-align: center;
+  height: auto;
+  background-color: red;
+  color: white;
+  transition: 0.5s ease-in-out;
+}
+
+/* spenning item */
+.spinner {
+  text-align: center;
+}
