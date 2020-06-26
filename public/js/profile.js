@@ -4,6 +4,8 @@ const logout = document.getElementById("logout");
 const task = document.getElementById("task");
 const deleteAccout = document.getElementById("deleteAccount");
 
+import {x} from './app.js'
+
 
 
 task.addEventListener('click' , ()=>{

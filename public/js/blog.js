@@ -74,6 +74,7 @@ let uiController = (() => {
 
 //moudler data
 let dataController = ((uiCtrl) => {
+  //post make req for creating post
   function makeReq(data) {
     const url = "/blog";
     postData(url, "POST", data).then((res) => {
@@ -82,13 +83,21 @@ let dataController = ((uiCtrl) => {
         uiCtrl.showError("server-msg", res.error);
       } else {
         setTimeout(() => {
-          window.location.href = "/blog";
+          window.location.href = "/blogs";
         }, 2000);
       }
     });
   }
+
+  //getting post 
+  function getPosts(){
+    console.log('res')
+      const url = '/blog';
+      postData(url , "GET").then(res => console.log(res))
+  }
   return {
     makeReq,
+    getPosts,
   };
 })(uiController);
 
@@ -143,6 +152,9 @@ let controller = ((uiCtrl, dataCtrl) => {
 
     //hiding dom element
     uiCtrl.hideDomContent();
+
+    //getting first 5 posts
+    dataCtrl.getPosts()
   }
   return {
     init,
