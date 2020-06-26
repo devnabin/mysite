@@ -47,6 +47,13 @@ userSchema.virtual("mytask", {
   foreignField: "owner",
 });
 
+
+userSchema.virtual('allblogs', {
+  ref : 'blogs',
+  localField : '_id',
+  foreignField : 'owner'
+})
+
 userSchema.methods.jwtoken = async function () {
   const user = this;
   const token = jwt.sign({ _id: user._id }, "nokianabin");
@@ -67,7 +74,6 @@ userSchema.methods.jwtoken = async function () {
 
  //deleting all task associate with that user 
 userSchema.pre("remove", async function (next) {
-  console.log('hi am exe')
   await task.deleteMany({ owner: this._id });
   next();
 });
