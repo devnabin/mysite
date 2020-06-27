@@ -19,9 +19,21 @@ router.post("/login", async (req, res) => {
       res.status(400).send("Incorrect password");
     } else {
       const token = await user.jwtoken();
-      res.cookie("coo-key", `${token}`);
-      res.cookie("user", `${user.name}`);
+      //date
+      var d = new Date();
+      var year = d.getFullYear();
+      console.log(year)
+      var month = d.getMonth();
+      console.log(month)
+      var day = d.getDate();
+      console.log(day)
+      var c = new Date(year + 2, month, day);
+  
+      //\date
+      res.cookie("coo-key", `${token}` ,{ expires : c});
+      res.cookie("user", `${user.name}` , { expires : c});
       res.status(200).send({ user, token });
+      // res.cookie('rememberme', '1',  httpOnly: true });
     }
   } catch (error) {
     console.log(error);
@@ -54,11 +66,10 @@ router.post("/register", async (req, res) => {
 
 
 
-router.get('/test', async (req,res)=>{
-  res.render('test')
-
+/* router.get('/test', async (req,res)=>{
+  res.render('test') 
 })
-
+*/
 
 
 module.exports = router;
