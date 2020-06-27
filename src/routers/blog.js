@@ -20,9 +20,16 @@ router.get("/blogs/post", (req, res) => {
 //get all blog  , this is the route for pagination
 router.get("/blog", auth, async (req, res) => {
   try {
+    // 1 searching blogs by populating -------------------------
     // await req.user.populate("allblogs").execPopulate();
     // res.status(200).send(req.user.allblogs);
-    const blogs = await blog.find()
+    
+    // 2 searching blog by common way -----------------------------
+    //  const blogs = await blog.find({})
+
+    // 3 searching blog by pagination-------------------------------------------------------------------
+    const blogs = await blog.find({}).limit(parseInt(req.query.limit)).skip(parseInt(req.query.skip))
+    
     res.send(blogs)
   } catch (error) {
     res.status(404).send(error);
