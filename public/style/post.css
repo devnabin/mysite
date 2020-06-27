@@ -1,0 +1,31 @@
+.bodydiv{
+    height: auto;
+    margin: 10vh auto;
+    display: flex;
+    flex-direction: column;
+    width: 100vh;
+/*     justify-content: center;
+  align-content: center; 
+    text-align: center; */
+
+}
+
+
+.bodydiv div div span{
+margin-right: 10px;
+}
+.bodydiv div div span i{
+    margin-right: 4px;
+
+}
+
+.bodydiv h1{
+    font-size: 20px;
+}
+
+.bodydiv p{
+    font-size: 15px;
+}
+#postimg{
+    margin: 10vh 0 10vh 0;
+}

@@ -65,12 +65,28 @@
   width: 100%;
 }
 .content h5 {
-  height: 30%;
+  height: 20%;
   overflow: hidden;
+  
 }
 .content p {
   height: 70%;
   overflow: hidden;
+}
+
+.content div{
+  height: 10%;
+  text-align: right;
+  
+}
+
+.content div span{
+  margin:auto 10px;
+}
+
+
+.content div span i{
+margin:0 6px ;
 }
 
 /* errmsg */

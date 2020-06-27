@@ -12,11 +12,18 @@ router.get("/blogs", (req, res) => {
   res.render("blog");
 });
 
+router.get("/blogs/post", (req, res) => {
+  if (!(req.cookies.user && req.cookies["coo-key"])) return res.render("404");
+  res.render("post");
+});
+
 //get all blog  , this is the route for pagination
 router.get("/blog", auth, async (req, res) => {
   try {
-    await req.user.populate("allblogs").execPopulate();
-    res.status(200).send(req.user.allblogs);
+    // await req.user.populate("allblogs").execPopulate();
+    // res.status(200).send(req.user.allblogs);
+    const blogs = await blog.find()
+    res.send(blogs)
   } catch (error) {
     res.status(404).send(error);
   }
@@ -33,7 +40,7 @@ router.get("/blog/:id", auth, async (req, res) => {
 });
 
 //get image by id
-router.get("/blog/image/:id", auth, async (req, res) => {
+router.get("/blog/image/:id", async (req, res) => {
   try {
     let img = await blog.findById(req.params.id);
     if (!img || !img.pic) {
@@ -63,6 +70,7 @@ router.post(
         heading: req.body.heading,
         description: req.body.description,
         pic: buffer,
+        postowner : req.user.name,
         owner: req.user._id,
       });
       post.save();

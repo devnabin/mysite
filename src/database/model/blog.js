@@ -12,16 +12,18 @@ pic  : {
     type : Buffer,
     required : true,
 },
+postowner:{
+type : String,
+required: true
+},
 owner : {
     type :mongoose.Schema.Types.ObjectId,
     ref : 'user',
     required : true
 }
-},
-{
-    Timestamp : true
-}
-)
+},{
+    timestamps: true,
+  });
 
 
 //New Method to hideing private data

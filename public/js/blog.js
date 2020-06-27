@@ -4,23 +4,33 @@ import { postData } from "./fetch.js";
 let uiController = (() => {
   //all classes and ids
   let domStrings = {
+    //for add post page =================================================================================================================
     errmsg: document.querySelector(".errmsg"), //error div
     spinner: document.querySelector(".spinner"), //spinning div
     postbut: document.getElementById("post-but"), //post button
     heading: document.getElementById("heading"), //heading input
     description: document.getElementById("description"), //description input
     pic: document.getElementById("blogpic"), //pic input / file type
+    //for blog page /blogs------------------------------------------------------------------------------------------------------------------
+    showmorediv: document.querySelector(".showmoreDiv"),
+    nopostdiv: document.querySelector(".noPostFound"),
+    renderingdiv: document.querySelector(".rendring"),
+    bodydiv: document.querySelector(".bodydiv"),
   };
 
   //hiding dom content at first
   function hideDomContent() {
+    //for add post page =================================================================================================================
     domStrings.errmsg.style.display = "none";
     domStrings.spinner.style.display = "none";
+    //for blog page /blogs------------------------------------------------------------------------------------------------------------------
+    domStrings.showmorediv.style.display = "none";
+    domStrings.nopostdiv.style.display = "none";
   }
-
+  //for add post page =================================================================================================================
   //display domContent before post request
-  function displayDomContent() {
-    domStrings.spinner.style.display = "block";
+  function displayDomContent(arg) {
+    domStrings[arg].style.display = "block";
   }
 
   //getting data from ui
@@ -62,6 +72,29 @@ let uiController = (() => {
     }
   }
 
+  //for blog page /blogs------------------------------------------------------------------------------------------------------------------
+  function renderPost(obj) {
+    // console.log(obj)
+    let html;
+    // html = `<div class="apost d-flex" id="%id%"><img src="%img%"alt="" /><div><span> <i class="fa fa-user" aria-hidden="true"></i>%userpost%</span><span> <i class="fa fa-calendar" aria-hidden="true"></i>%postdate%</span></div><div class="content"><h5 class="heading">%heading%</h5><p>%des%</p></div></div>`;
+    html = `<div class="apost d-flex" id="%id%"><img src="%img%" alt=""><div class="content"><div><span> <i class="fa fa-user" aria-hidden="true"></i>%userpost%</span><span> <i class="fa fa-calendar" aria-hidden="true"></i>%postdate%</span></div><h5 class="heading">%heading%</h5><p>%des%</p></div></div>`;
+
+    // html = `<div class="apost d-flex" id="%id%"><img src="%img%"alt="" /><div class="content"><h5 class="heading">%heading%</h5><p>%des%</p></div></div>`;
+    html = html.replace("%id%", obj._id);
+    html = html.replace("%img%", `/blog/image/${obj._id}`);
+    html = html.replace("%heading%", obj.heading);
+    html = html.replace("%des%", obj.description);
+    //===
+    let time = obj.createdAt.split("T");
+    html = html.replace("%userpost%", obj.postowner);
+    html = html.replace("%postdate%", time[0]);
+
+    domStrings.renderingdiv.insertAdjacentHTML("afterbegin", html);
+  }
+
+  //showing post
+  function showPost() {}
+
   return {
     domStrings,
     hideDomContent,
@@ -69,6 +102,8 @@ let uiController = (() => {
     getData,
     showError,
     markGreen,
+    renderPost,
+    showPost,
   };
 })();
 
@@ -89,11 +124,19 @@ let dataController = ((uiCtrl) => {
     });
   }
 
-  //getting post 
-  function getPosts(){
-    console.log('res')
-      const url = '/blog';
-      postData(url , "GET").then(res => console.log(res))
+  //getting post
+  function getPosts() {
+    const url = "/blog";
+
+    postData(url, "GET").then((res) => {
+      console.log(res);
+      if (res.length >= 5) {
+        uiCtrl.displayDomContent("showmorediv");
+      }
+      res.forEach((el) => {
+        uiController.renderPost(el);
+      });
+    });
   }
   return {
     makeReq,
@@ -139,10 +182,31 @@ let controller = ((uiCtrl, dataCtrl) => {
       uiCtrl.hideDomContent();
 
       //showing spinners
-      uiCtrl.displayDomContent();
+      uiCtrl.displayDomContent("spinner");
 
       //making post request for a blog
       dataCtrl.makeReq(fd);
+    }
+  }
+
+  function postEventTo(e) {
+    let blogid;
+    if (e.target.parentElement.id) {
+      blogid = e.target.parentElement.id;
+    } else if (e.target.parentElement.parentElement.id) {
+      blogid = e.target.parentElement.parentElement.id;
+    }
+
+    if (blogid) {
+      localStorage.setItem("blogid", blogid);
+      window.location.href = "/blogs/post";
+    }
+  }
+
+  //removing local storage data
+  function removeData() {
+    if (localStorage.getItem("blogid")) {
+      localStorage.removeItem("blogid");
     }
   }
 
@@ -150,11 +214,17 @@ let controller = ((uiCtrl, dataCtrl) => {
     //event listner setup
     domStrings.postbut.addEventListener("click", postEvent);
 
+    //removing localstorage data if have
+    removeData();
+
+    //event lister to individual post
+    uiCtrl.domStrings.bodydiv.addEventListener("click", postEventTo);
+
     //hiding dom element
     uiCtrl.hideDomContent();
 
     //getting first 5 posts
-    dataCtrl.getPosts()
+    dataCtrl.getPosts();
   }
   return {
     init,
@@ -162,3 +232,5 @@ let controller = ((uiCtrl, dataCtrl) => {
 })(uiController, dataController);
 
 controller.init();
+
+//<div class="apost d-flex" id=""><img src="%img%" alt=""><div class="content"><div><span> <i class="fa fa-user" aria-hidden="true"></i>%userpost%</span><span> <i class="fa fa-calendar" aria-hidden="true"></i>%postdate%</span></div><h5 class="heading">%heading%</h5><p>%des%</p></div></div>
