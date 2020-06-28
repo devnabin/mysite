@@ -28,8 +28,9 @@ router.get("/blog", auth, async (req, res) => {
     //  const blogs = await blog.find({})
 
     // 3 searching blog by pagination-------------------------------------------------------------------
-    const blogs = await blog.find({}).limit(parseInt(req.query.limit)).skip(parseInt(req.query.skip))
-    
+    const limit = parseInt(req.query.limit)
+    const skip =  parseInt(req.query.skip)
+    const blogs = await blog.find({}).limit(limit).skip(skip).sort({createdAt: -1})
     res.send(blogs)
   } catch (error) {
     res.status(404).send(error);

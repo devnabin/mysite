@@ -12,10 +12,12 @@ let uiController = (() => {
     description: document.getElementById("description"), //description input
     pic: document.getElementById("blogpic"), //pic input / file type
     //for blog page /blogs------------------------------------------------------------------------------------------------------------------
-    showmorediv: document.querySelector(".showmoreDiv"),
+    showmorediv: document.querySelector(".showmore"),
     nopostdiv: document.querySelector(".noPostFound"),
     renderingdiv: document.querySelector(".rendring"),
     bodydiv: document.querySelector(".bodydiv"),
+    //go up || go to top
+    goup : document.querySelector(".goup"),
   };
 
   //hiding dom content at first
@@ -26,6 +28,8 @@ let uiController = (() => {
     //for blog page /blogs------------------------------------------------------------------------------------------------------------------
     domStrings.showmorediv.style.display = "none";
     domStrings.nopostdiv.style.display = "none";
+    // domStrings.goup.style.display = "none";
+
   }
   //for add post page =================================================================================================================
   //display domContent before post request
@@ -89,11 +93,17 @@ let uiController = (() => {
     html = html.replace("%userpost%", obj.postowner);
     html = html.replace("%postdate%", time[0]);
 
-    domStrings.renderingdiv.insertAdjacentHTML("afterbegin", html);
+    domStrings.renderingdiv.insertAdjacentHTML("beforeend", html);
   }
 
   //showing post
-  function showPost() {}
+  function goup() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
 
   return {
     domStrings,
@@ -103,7 +113,7 @@ let uiController = (() => {
     showError,
     markGreen,
     renderPost,
-    showPost,
+    goup,
   };
 })();
 
@@ -124,14 +134,20 @@ let dataController = ((uiCtrl) => {
     });
   }
 
+  let a = 0;
   //getting post
   function getPosts() {
-    const url = "/blog";
-
+    const url = `/blog/?limit=5&skip=${a}`;
     postData(url, "GET").then((res) => {
-      console.log(res);
-      if (res.length >= 5) {
+      a += res.length;
+      if (res.length == 5) {
         uiCtrl.displayDomContent("showmorediv");
+        // uiCtrl.displayDomContent("goup");
+      } else if (res.length < 2) {
+        uiCtrl.hideDomContent();
+        uiCtrl.displayDomContent("nopostdiv");
+        // uiCtrl.displayDomContent("goup");
+
       }
       res.forEach((el) => {
         uiController.renderPost(el);
@@ -225,6 +241,13 @@ let controller = ((uiCtrl, dataCtrl) => {
 
     //getting first 5 posts
     dataCtrl.getPosts();
+
+    //getting another 5 post by clicking show more button || pagination
+    domStrings.showmorediv.addEventListener("click", dataCtrl.getPosts);
+
+    //goto top || go up event listner
+    uiCtrl.domStrings.goup.addEventListener('click' , uiCtrl.goup)
+
   }
   return {
     init,

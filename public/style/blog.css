@@ -67,26 +67,23 @@
 .content h5 {
   height: 20%;
   overflow: hidden;
-  
 }
 .content p {
   height: 70%;
   overflow: hidden;
 }
 
-.content div{
+.content div {
   height: 10%;
   text-align: right;
-  
 }
 
-.content div span{
-  margin:auto 10px;
+.content div span {
+  margin: auto 10px;
 }
 
-
-.content div span i{
-margin:0 6px ;
+.content div span i {
+  margin: 0 6px;
 }
 
 /* errmsg */
@@ -102,4 +99,33 @@ margin:0 6px ;
 /* spenning item */
 .spinner {
   text-align: center;
+}
+
+/* go to up button  */
+
+.goup{
+  height: 6vh;
+  width: 6vh;
+  color: white;
+  border-color: #7039d5;
+  background: #7039d5;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 5vh;
+  bottom: 10vh;
+  transition: 500ms;
+}
+
+.goup i{
+  font-size: 4vh;
+}
+
+
+.goup:hover{
+  border-color: #4c00d8;
+  background: #4c00d8;
+  transform: scale(1.2);
 }
