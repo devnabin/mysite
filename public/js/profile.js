@@ -4,16 +4,11 @@ const logout = document.getElementById("logout");
 const task = document.getElementById("task");
 const deleteAccout = document.getElementById("deleteAccount");
 
-import {x} from './app.js'
+import { x } from "./app.js";
 
-
-
-task.addEventListener('click' , ()=>{
-window.location.href = 'me/task'
-})
-
-
-
+task.addEventListener("click", () => {
+  window.location.href = "me/task";
+});
 
 //1
 //return go back
@@ -175,18 +170,22 @@ async function makeReq(url, method, data = {}) {
 }
 
 //load  or show value to the browser
+  if (x) {
+    getRes("/user")
+      .then((res) => {
+        console.log(res);
 
-if (x) {
-  getRes("/user")
-    .then((res) => {
-      document.getElementById("name").textContent = res.name;
-      document.getElementById("email").textContent = res.email;
-      document.querySelector(".sub2-child2 p").textContent = res.bio;
+        document.getElementById("name").textContent = res.name;
+        document.getElementById("email").textContent = res.email;
+        document.querySelector(".sub2-child2 p").textContent = res.bio;
 
-      // document.getElementById('name').textContent = res.name
-    })
-    .catch((error) => console.log(error));
-}
+        //update profile
+        if (localStorage.getItem("image") == "1") {
+          document.getElementById("pp").src = `/user/pic/${res._id}`;
+        }
+      })
+      .catch((error) => console.log(error));
+  }
 
 async function getRes(url, data = {}) {
   const response = await fetch(url, {
@@ -198,3 +197,25 @@ async function getRes(url, data = {}) {
   });
   return response.json();
 }
+
+//profile picture
+document.getElementById("uploadpic-but").addEventListener("click", () => {
+  const img = document.getElementById("upload-photo").files[0];
+  let data = new FormData();
+  data.append("upload", img);
+
+  fetch("/user/pic", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${x}`,
+    },
+    body: data,
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.done == "done") {
+        localStorage.setItem("image", "1");
+        window.location.href = '/me'
+      }
+    });
+});

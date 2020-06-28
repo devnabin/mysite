@@ -39,6 +39,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 20,
   },
+  profile :{
+  type : Buffer,
+  },
 });
 
 userSchema.virtual("mytask", {

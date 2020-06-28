@@ -115,9 +115,9 @@
   display: none;
 }
 
-* {
+/* * {
   background-color: rgb(240, 238, 238);
-}
+} */
 .maindiv {
   min-height: 100vh;
   display: flex;
@@ -181,7 +181,16 @@ img {
 
 /* profile picture */
 
-#laberforinput{
+
+
+#uploadpic-but{
+  margin-left: 1vw;
+  cursor: pointer;
+
+
+}
+
+ #laberforinput{
   cursor: pointer;
 }
 
@@ -194,16 +203,15 @@ img {
 }
 
 
-.hello {
+/* .hello {
   font-weight: bold;
   font-family: "Open Sans", sans-serif;
   color: rgb(87, 87, 87);
   font-size: 40px;
-}
+} */
 .name {
   letter-spacing: 1px;
   font-family: "Open Sans", sans-serif;
-
   font-size: 30px;
 }
 .email {

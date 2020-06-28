@@ -1,6 +1,8 @@
 const express = require("express");
 const router = new express.Router();
 const auth = require("../middlewares/auth");
+const imageValidate = require('../middlewares/image')
+const sharp = require('sharp')
 
 
 router.get("/me", (req, res) => {
@@ -14,6 +16,40 @@ router.get("/user", auth, (req, res) => {
   res.send(req.user);
 });
 
+
+//image upload by user and getting image for profile page
+router.post('/user/pic' , imageValidate.single('upload') ,  auth , async(req,res)=>{
+  try {
+    console.log('hi i am post image')
+    const buffer =await sharp(req.file.buffer).resize({width:300,height:300}).png().toBuffer();
+    req.user.profile = buffer;
+    await req.user.save()
+    res.send({done : 'done'})
+  } catch (error) {
+    res.status(400).send(error);
+  }
+},
+(error, req, res, next) => {
+  res.status(400).send({ error: error.message });
+})
+
+
+router.get('/user/pic/:id' ,async(req,res)=>{
+  try {
+    const User = require("../database/model/Usermodel");
+    const user = await User.findById(req.params.id)
+    if(!user){
+      throw new Error()
+    }
+    res.set("Content-Type", "image/png");
+    res.send(user.profile);
+    
+  } catch (error) {
+    res.status(404).send(error)
+  }
+})
+
+//======================================================
 router.patch("/user/update", auth, async (req, res) => {
  
   const toUpdate = Object.keys(req.body);
